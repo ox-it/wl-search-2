@@ -25,5 +25,7 @@ public interface Content {
 
     String getId();
 
+    String getContainer();
+
     Map<String, Collection<String>> getProperties();
 }
