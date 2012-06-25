@@ -30,15 +30,25 @@
         <!-- dependencies versions -->
         <sakai.kernel.version>1.2.5</sakai.kernel.version>
         <sakai.entitybroker.version>1.4.3</sakai.entitybroker.version>
+        <sakai.search.version>1.3.5-SNAPSHOT</sakai.search.version>
+
         <slf4j.version>1.6.4</slf4j.version>
     </properties>
 
     <modules>
         <module>api</module>
+        <module>backward-compatibility</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <!-- Internal dependencies -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>search2-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -55,6 +65,11 @@
                 <groupId>org.sakaiproject.kernel</groupId>
                 <artifactId>sakai-kernel-api</artifactId>
                 <version>${sakai.kernel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.sakaiproject.search</groupId>
+                <artifactId>search-api</artifactId>
+                <version>${sakai.search.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
