@@ -3,7 +3,6 @@ package uk.ac.ox.oucs.search2;
 import uk.ac.ox.oucs.search2.filter.SearchFilter;
 import uk.ac.ox.oucs.search2.result.SearchResultList;
 
-import javax.naming.directory.SearchResult;
 import java.util.Collection;
 
 /**
