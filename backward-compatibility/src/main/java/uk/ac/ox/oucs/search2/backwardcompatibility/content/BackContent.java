@@ -114,12 +114,6 @@ public abstract class BackContent implements Content {
     }
 
     public static Content extractContent(String reference, EntityContentProducer entityContentProducer) {
-        //TODO: If and when the previous API support Streams instead of just Readers and String, see the code below
-        /*
-        if(entityContentProducer instanceof BinaryEntityContentProducer)
-            return new BackStreamContent(reference, entityContentProducer);
-        else
-        */
         if (entityContentProducer.isContentFromReader(reference))
             return new BackReaderContent(reference, entityContentProducer);
         else
@@ -149,19 +143,4 @@ public abstract class BackContent implements Content {
             return super.entityContentProducer.getContent(super.reference);
         }
     }
-
-    //TODO: If and when the previous API support Streams instead of just Readers and String, see the code below
-    /*
-    public static class BackStreamContent extends BackContent implements StreamContent {
-
-        public BackStreamContent(String reference, EntityContentProducer entityContentProducer) {
-            super(reference, entityContentProducer);
-        }
-
-        @Override
-        public InputStream getContent() {
-            return ((BinaryEntityContentProducer) super.entityContentProducer).getContentStream(super.reference);
-        }
-    }
-    */
 }
