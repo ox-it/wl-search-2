@@ -28,11 +28,13 @@ public interface IndexEventHandler {
 
     IndexAction getIndexAction(Event event);
 
-    Content getContent(Event event);
+    Iterable<Content> getContent(Event event);
 
     String getSite(Event event);
 
     String getSiteTool(Event event);
+
+    String getName();
 
     boolean isHandled(Event event);
 }
