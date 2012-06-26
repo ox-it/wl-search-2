@@ -44,40 +44,40 @@ public class DefaultIndexEventManager extends IndexEventManager {
 
         switch (eventHandler.getIndexAction(event)) {
             case INDEX_FILE:
-                indexingService.indexContent(eventHandler.getContent(event));
-                break;
-            case REINDEX_FILE:
-                indexingService.reindexContent(eventHandler.getContent(event));
+                indexingService.indexContent(eventHandler.getName(), eventHandler.getContent(event));
                 break;
             case UNINDEX_FILE:
-                indexingService.unindexContent(eventHandler.getContent(event));
+                indexingService.unindexContent(eventHandler.getName(), eventHandler.getContent(event));
                 break;
-            case INDEX_ALL:
-                indexingService.indexEverything();
-                break;
-            case REINDEX_ALL:
-                indexingService.reindexEverything();
-                break;
-            case UNINDEX_ALL:
-                indexingService.unindexEverything();
-                break;
-            case INDEX_SITE:
-                indexingService.indexSite(eventHandler.getSite(event));
-                break;
-            case REINDEX_SITE:
-                indexingService.reindexSite(eventHandler.getSite(event));
-                break;
-            case UNINDEX_SITE:
-                indexingService.unindexSite(eventHandler.getSite(event));
-                break;
+
             case INDEX_SITETOOL:
-                indexingService.unindexSiteTool(eventHandler.getSiteTool(event));
+                indexingService.indexSiteTool(eventHandler.getName(), eventHandler.getContent(event), eventHandler.getSiteTool(event));
                 break;
             case REINDEX_SITETOOL:
-                indexingService.reindexSiteTool(eventHandler.getSiteTool(event));
+                indexingService.reindexSiteTool(eventHandler.getName(), eventHandler.getContent(event), eventHandler.getSiteTool(event));
                 break;
             case UNINDEX_SITETOOL:
-                indexingService.unindexSiteTool(eventHandler.getSiteTool(event));
+                indexingService.unindexSiteTool(eventHandler.getName(), eventHandler.getSiteTool(event));
+                break;
+
+            case INDEX_SITE:
+                indexingService.indexSite(eventHandler.getName(), eventHandler.getContent(event), eventHandler.getSite(event));
+                break;
+            case REINDEX_SITE:
+                indexingService.reindexSite(eventHandler.getName(), eventHandler.getContent(event), eventHandler.getSite(event));
+                break;
+            case UNINDEX_SITE:
+                indexingService.unindexSite(eventHandler.getName(), eventHandler.getSite(event));
+                break;
+
+            case INDEX_ALL:
+                indexingService.indexAll(eventHandler.getName(), eventHandler.getContent(event));
+                break;
+            case REINDEX_ALL:
+                indexingService.reindexAll(eventHandler.getName(), eventHandler.getContent(event));
+                break;
+            case UNINDEX_ALL:
+                indexingService.unindexAll(eventHandler.getName());
                 break;
             default:
                 //TODO: Log that

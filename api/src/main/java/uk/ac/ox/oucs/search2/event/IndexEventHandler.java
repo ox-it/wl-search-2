@@ -11,14 +11,16 @@ import java.util.Collection;
 public interface IndexEventHandler {
     public enum IndexAction {
         INDEX_FILE,
-        REINDEX_FILE,
         UNINDEX_FILE,
+
         INDEX_SITE,
         REINDEX_SITE,
         UNINDEX_SITE,
+
         INDEX_SITETOOL,
         REINDEX_SITETOOL,
         UNINDEX_SITETOOL,
+
         INDEX_ALL,
         REINDEX_ALL,
         UNINDEX_ALL

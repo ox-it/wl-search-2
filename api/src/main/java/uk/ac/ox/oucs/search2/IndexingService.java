@@ -6,27 +6,25 @@ import uk.ac.ox.oucs.search2.content.Content;
  * @author Colin Hebert
  */
 public interface IndexingService {
-    void indexContent(Content content);
+    void indexContent(String eventHandlerName, Iterable<Content> content);
 
-    void reindexContent(Content content);
+    void unindexContent(String eventHandlerName, Iterable<Content> content);
 
-    void unindexContent(Content content);
+    void indexSiteTool(String eventHandlerName, Iterable<Content> content, String siteTool);
 
-    void indexSite(String siteId);
+    void reindexSiteTool(String eventHandlerName, Iterable<Content> content, String siteTool);
 
-    void reindexSite(String siteId);
+    void unindexSiteTool(String eventHandlerName, String siteTool);
 
-    void unindexSite(String siteId);
+    void indexSite(String eventHandlerName, Iterable<Content> content, String site);
 
-    void indexSiteTool(String siteTool);
+    void reindexSite(String eventHandlerName, Iterable<Content> content, String site);
 
-    void reindexSiteTool(String siteTool);
+    void unindexSite(String eventHandlerName, String site);
 
-    void unindexSiteTool(String siteTool);
+    void indexAll(String eventHandlerName, Iterable<Content> content);
 
-    void indexEverything();
+    void reindexAll(String eventHandlerName, Iterable<Content> content);
 
-    void reindexEverything();
-
-    void unindexEverything();
+    void unindexAll(String eventHandlerName);
 }
