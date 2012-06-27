@@ -26,24 +26,6 @@ public interface IndexEventHandler {
         UNINDEX_FILE,
 
         /**
-         * Index every content available in a specific tool on a specific site, if the content has been modified
-         * the previous version of the said content will be overwritten.
-         * If a content is not available anymore, it won't be modified (or deleted) from the index.
-         */
-        INDEX_SITETOOL,
-        /**
-         * Index every content available in a specific tool on a specific site, if the content has been modified
-         * the previous version of the said content will be overwritten.
-         * If a content is not available anymore, it will be removed from the index.
-         */
-        REINDEX_SITETOOL,
-        /**
-         * Remove every content available in a specific tool on a specific site
-         * Useful when a tool has been disabled but the content hasn't been physically deleted.
-         */
-        UNINDEX_SITETOOL,
-
-        /**
          * Index an entire site, if the content was indexed, the new version will overwrite the previous one.
          * If the content is not available anymore, it won't be modified (or deleted) from the index.
          */
@@ -116,15 +98,6 @@ public interface IndexEventHandler {
      * @return The site ID or null if there is no site affected
      */
     String getSite(Event event);
-
-    /**
-     * Get the site/tool identifier for the tool in a site affected by an event.
-     *
-     * @param event event handled
-     * @return The site/tool ID or null if there is no tool affected
-     */
-    //TODO: This method doesn't mean anything and will be changed
-    String getSiteTool(Event event);
 
     /**
      * Get an unique name for the current event handler.

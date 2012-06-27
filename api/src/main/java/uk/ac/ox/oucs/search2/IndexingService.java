@@ -10,12 +10,6 @@ public interface IndexingService {
 
     void unindexContent(String eventHandlerName, Iterable<Content> content);
 
-    void indexSiteTool(String eventHandlerName, Iterable<Content> content, String siteTool);
-
-    void reindexSiteTool(String eventHandlerName, Iterable<Content> content, String siteTool);
-
-    void unindexSiteTool(String eventHandlerName, String siteTool);
-
     void indexSite(String eventHandlerName, Iterable<Content> content, String site);
 
     void reindexSite(String eventHandlerName, Iterable<Content> content, String site);

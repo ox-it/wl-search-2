@@ -51,12 +51,6 @@ public class BackAdditionalEventHandler implements IndexEventHandler {
     }
 
     @Override
-    public String getSiteTool(Event event) {
-        //Shouldn't be called
-        return null;
-    }
-
-    @Override
     public String getName() {
         return this.getClass().getName();
     }

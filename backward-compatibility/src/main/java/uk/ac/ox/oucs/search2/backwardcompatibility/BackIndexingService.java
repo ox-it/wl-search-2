@@ -21,16 +21,6 @@ public class BackIndexingService extends AbstractIndexingService {
     }
 
     @Override
-    public void indexSiteTool(String eventHandlerName, Iterable<Content> content, String siteTool) {
-        throw new UnsupportedOperationException("The previous search service doesn't support manual tool indexation");
-    }
-
-    @Override
-    public void unindexSiteTool(String eventHandlerName, String siteTool) {
-        throw new UnsupportedOperationException("The previous search service doesn't support manual tool removal");
-    }
-
-    @Override
     public void indexSite(String eventHandlerName, Iterable<Content> content, String site) {
         searchIndexBuilder.refreshIndex(site);
     }

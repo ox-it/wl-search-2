@@ -51,11 +51,6 @@ public class SearchServiceInterceptor implements SearchService, SearchIndexBuild
             }
 
             @Override
-            public String getSiteTool(Event event) {
-                return null;
-            }
-
-            @Override
             public boolean isHandled(Event event) {
                 return false;
             }
@@ -103,11 +98,6 @@ public class SearchServiceInterceptor implements SearchService, SearchIndexBuild
             @Override
             public String getSite(Event event) {
                 return ecp.getSiteId(event.getResource());
-            }
-
-            @Override
-            public String getSiteTool(Event event) {
-                return ecp.getTool();
             }
 
             @Override

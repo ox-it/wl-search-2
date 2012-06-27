@@ -24,10 +24,6 @@ public abstract class AbstractIndexEventHandler implements IndexEventHandler {
             case REINDEX_SITE:
             case UNINDEX_SITE:
                 return getSiteContent(reference);
-            case INDEX_SITETOOL:
-            case REINDEX_SITETOOL:
-            case UNINDEX_SITETOOL:
-                return getSiteToolContent(reference);
             case INDEX_ALL:
             case REINDEX_ALL:
             case UNINDEX_ALL:
@@ -62,14 +58,6 @@ public abstract class AbstractIndexEventHandler implements IndexEventHandler {
      * @return an Iterable containing every element related to the site
      */
     protected abstract Iterable<Content> getSiteContent(String siteId);
-
-    /**
-     * Get every content possible associated with one site tool
-     *
-     * @param siteToolId Unique identifier of the site tool
-     * @return an Iterable containing every element related to the site tool
-     */
-    protected abstract Iterable<Content> getSiteToolContent(String siteToolId);
 
     /**
      * Get every possible content to be indexed/unindexed

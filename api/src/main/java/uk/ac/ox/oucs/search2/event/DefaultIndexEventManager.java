@@ -50,16 +50,6 @@ public class DefaultIndexEventManager extends IndexEventManager {
                 indexingService.unindexContent(eventHandler.getName(), eventHandler.getContent(event));
                 break;
 
-            case INDEX_SITETOOL:
-                indexingService.indexSiteTool(eventHandler.getName(), eventHandler.getContent(event), eventHandler.getSiteTool(event));
-                break;
-            case REINDEX_SITETOOL:
-                indexingService.reindexSiteTool(eventHandler.getName(), eventHandler.getContent(event), eventHandler.getSiteTool(event));
-                break;
-            case UNINDEX_SITETOOL:
-                indexingService.unindexSiteTool(eventHandler.getName(), eventHandler.getSiteTool(event));
-                break;
-
             case INDEX_SITE:
                 indexingService.indexSite(eventHandler.getName(), eventHandler.getContent(event), eventHandler.getSite(event));
                 break;
