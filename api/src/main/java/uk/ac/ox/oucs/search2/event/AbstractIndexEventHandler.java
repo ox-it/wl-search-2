@@ -33,7 +33,7 @@ public abstract class AbstractIndexEventHandler implements IndexEventHandler {
             case UNINDEX_ALL:
                 return getAllContent();
             default:
-                logger.warn("Action '"+indexAction+"' isn't supported");
+                logger.warn("Action '" + indexAction + "' isn't supported");
                 return Collections.emptyList();
         }
     }

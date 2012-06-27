@@ -112,6 +112,7 @@ public interface IndexEventHandler {
 
     /**
      * Returns true if and only if the event is handled
+     *
      * @param event Event to check
      * @return true if and only if the event is handled
      */

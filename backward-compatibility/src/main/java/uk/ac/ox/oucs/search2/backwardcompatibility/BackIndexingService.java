@@ -31,7 +31,7 @@ public class BackIndexingService extends AbstractIndexingService {
     }
 
     @Override
-    public void unindexSite(String eventHandlerName, String site){
+    public void unindexSite(String eventHandlerName, String site) {
         throw new UnsupportedOperationException("The previous search service doesn't support manual site removal");
     }
 
