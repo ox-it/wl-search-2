@@ -1,6 +1,8 @@
 package uk.ac.ox.oucs.search2.event;
 
 import org.sakaiproject.event.api.Event;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.ac.ox.oucs.search2.content.Content;
 
 import java.util.Collections;
@@ -11,6 +13,8 @@ import java.util.Collections;
  * @author Colin Hebert
  */
 public abstract class AbstractIndexEventHandler implements IndexEventHandler {
+    private static final Logger logger = LoggerFactory.getLogger(AbstractIndexEventHandler.class);
+
     @Override
     public Iterable<Content> getContent(Event event) {
         IndexAction indexAction = getIndexAction(event);
@@ -29,7 +33,7 @@ public abstract class AbstractIndexEventHandler implements IndexEventHandler {
             case UNINDEX_ALL:
                 return getAllContent();
             default:
-                //TODO: Log
+                logger.warn("Action '"+indexAction+"' isn't supported");
                 return Collections.emptyList();
         }
     }

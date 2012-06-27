@@ -1,5 +1,7 @@
 package uk.ac.ox.oucs.search2.filter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.ac.ox.oucs.search2.result.SearchResult;
 
 import java.util.Iterator;

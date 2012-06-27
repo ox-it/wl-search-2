@@ -2,6 +2,8 @@ package uk.ac.ox.oucs.search2.event;
 
 import org.sakaiproject.event.api.Event;
 import org.sakaiproject.event.api.NotificationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.ac.ox.oucs.search2.IndexingService;
 
 import java.util.Collection;
@@ -12,6 +14,7 @@ import java.util.Map;
  * @author Colin Hebert
  */
 public class DefaultIndexEventManager extends IndexEventManager {
+    private static final Logger logger = LoggerFactory.getLogger(DefaultIndexEventManager.class);
     private IndexingService indexingService;
     private Map<String, Collection<IndexEventHandler>> indexEventHandlers;
 
@@ -70,7 +73,7 @@ public class DefaultIndexEventManager extends IndexEventManager {
                 indexingService.unindexAll(eventHandler.getName());
                 break;
             default:
-                //TODO: Log that
+                logger.warn("Action '" + eventHandler.getIndexAction(event) + "' not supported, nothing has been done.");
         }
     }
 }
