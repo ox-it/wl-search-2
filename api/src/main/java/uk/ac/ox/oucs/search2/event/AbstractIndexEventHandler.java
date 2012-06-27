@@ -18,12 +18,39 @@ public abstract class AbstractIndexEventHandler implements IndexEventHandler {
 
     @Override
     public Iterable<Content> getContent(Event event) {
+        IndexAction indexAction = getIndexAction(event);
         String reference = event.getResource();
-        return Collections.singleton(contentProducer.getContent(reference));
+
+        switch (indexAction) {
+            case INDEX_FILE:
+            case UNINDEX_FILE:
+                return Collections.singleton(contentProducer.getContent(reference));
+            case INDEX_SITE:
+            case REINDEX_SITE:
+            case UNINDEX_SITE:
+                return getSiteContent(reference);
+            case INDEX_SITETOOL:
+            case REINDEX_SITETOOL:
+            case UNINDEX_SITETOOL:
+                return getSiteToolContent(reference);
+            case INDEX_ALL:
+            case REINDEX_ALL:
+            case UNINDEX_ALL:
+                return getAllContent();
+            default:
+                //TODO: Log
+                return Collections.emptyList();
+        }
     }
 
     @Override
     public String getName() {
         return this.getClass().getCanonicalName();
     }
+
+    protected abstract Iterable<Content> getSiteContent(String siteId);
+
+    protected abstract Iterable<Content> getSiteToolContent(String siteToolId);
+
+    protected abstract Iterable<Content> getAllContent();
 }
