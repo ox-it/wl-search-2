@@ -15,7 +15,7 @@ public abstract class AbstractSearchResultList implements SearchResultList {
         this.results = Collections.unmodifiableList(results);
     }
 
-    public AbstractSearchResultList(List<SearchResult> results, Iterable<SearchFilter> searchFilters) {
+    protected AbstractSearchResultList(List<SearchResult> results, Iterable<SearchFilter> searchFilters) {
         List<SearchResult> filteredResults = new ArrayList<SearchResult>(results.size());
         for (SearchResult searchResult : results) {
             SearchResult filteredResult = new FilterChain(searchFilters).filter(searchResult);
