@@ -7,11 +7,19 @@ import uk.ac.ox.oucs.search2.content.ContentProducer;
 import java.util.Collections;
 
 /**
+ * Basic implementation of {@link IndexEventHandler}
+ * <p>
+ * This abstract implementation relies on a {@link ContentProducer} to generate content.
+ * </p>
+ *
  * @author Colin Hebert
  */
 public abstract class AbstractIndexEventHandler implements IndexEventHandler {
     private ContentProducer contentProducer;
 
+    /**
+     * @param contentProducer Content producer used to generate the content in {@link #getContent(Event)}
+     */
     protected AbstractIndexEventHandler(ContentProducer contentProducer) {
         this.contentProducer = contentProducer;
     }
@@ -43,14 +51,35 @@ public abstract class AbstractIndexEventHandler implements IndexEventHandler {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * Get the current class canonical name as the unique name
+     */
     @Override
     public String getName() {
         return this.getClass().getCanonicalName();
     }
 
+    /**
+     * Get every content possible associated with one site
+     *
+     * @param siteId Unique identifier of the site
+     * @return an Iterable containing every element related to the site
+     */
     protected abstract Iterable<Content> getSiteContent(String siteId);
 
+    /**
+     * Get every content possible associated with one site tool
+     *
+     * @param siteToolId Unique identifier of the site tool
+     * @return an Iterable containing every element related to the site tool
+     */
     protected abstract Iterable<Content> getSiteToolContent(String siteToolId);
 
+    /**
+     * Get every possible content to be indexed/unindexed
+     *
+     * @return an Iterable containing every element handled
+     */
     protected abstract Iterable<Content> getAllContent();
 }
