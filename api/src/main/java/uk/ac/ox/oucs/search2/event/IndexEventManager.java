@@ -28,6 +28,18 @@ public abstract class IndexEventManager implements NotificationAction {
     }
 
     @Override
+    public void notify(Notification notification, Event event) {
+        logger.debug("The event '" + event.getResource() + "' is now monitored by the index event manager.");
+        notify(event);
+    }
+
+    protected abstract void notify(Event event);
+
+    //-------------------------------------------------------------------------------
+    //  The following methods aren't relevant for the IndexEventManager
+    //-------------------------------------------------------------------------------
+
+    @Override
     public void set(Element element) {
     }
 
@@ -43,11 +55,4 @@ public abstract class IndexEventManager implements NotificationAction {
     @Override
     public void toXml(Element element) {
     }
-
-    @Override
-    public void notify(Notification notification, Event event) {
-        notify(event);
-    }
-
-    protected abstract void notify(Event event);
 }
