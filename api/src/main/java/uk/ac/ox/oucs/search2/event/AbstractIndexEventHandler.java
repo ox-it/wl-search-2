@@ -2,28 +2,15 @@ package uk.ac.ox.oucs.search2.event;
 
 import org.sakaiproject.event.api.Event;
 import uk.ac.ox.oucs.search2.content.Content;
-import uk.ac.ox.oucs.search2.content.ContentProducer;
 
 import java.util.Collections;
 
 /**
  * Basic implementation of {@link IndexEventHandler}
- * <p>
- * This abstract implementation relies on a {@link ContentProducer} to generate content.
- * </p>
  *
  * @author Colin Hebert
  */
 public abstract class AbstractIndexEventHandler implements IndexEventHandler {
-    private ContentProducer contentProducer;
-
-    /**
-     * @param contentProducer Content producer used to generate the content in {@link #getContent(Event)}
-     */
-    protected AbstractIndexEventHandler(ContentProducer contentProducer) {
-        this.contentProducer = contentProducer;
-    }
-
     @Override
     public Iterable<Content> getContent(Event event) {
         IndexAction indexAction = getIndexAction(event);
@@ -32,7 +19,7 @@ public abstract class AbstractIndexEventHandler implements IndexEventHandler {
         switch (indexAction) {
             case INDEX_FILE:
             case UNINDEX_FILE:
-                return Collections.singleton(contentProducer.getContent(reference));
+                return Collections.singleton(getContent(reference));
             case INDEX_SITE:
             case REINDEX_SITE:
             case UNINDEX_SITE:
@@ -59,6 +46,14 @@ public abstract class AbstractIndexEventHandler implements IndexEventHandler {
     public String getName() {
         return this.getClass().getCanonicalName();
     }
+
+    /**
+     * Get content from a reference
+     *
+     * @param reference Reference of the wanted content
+     * @return a Content
+     */
+    protected abstract Content getContent(String reference);
 
     /**
      * Get every content possible associated with one site
