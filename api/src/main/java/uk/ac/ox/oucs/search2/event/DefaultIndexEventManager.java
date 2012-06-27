@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import uk.ac.ox.oucs.search2.IndexingService;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ public class DefaultIndexEventManager extends IndexEventManager {
 
     public DefaultIndexEventManager(NotificationService notificationService) {
         super(notificationService);
+        indexEventHandlers = new HashMap<String, Collection<IndexEventHandler>>();
     }
 
     public void addContentEventHandler(IndexEventHandler indexEventHandler) {
@@ -75,5 +77,9 @@ public class DefaultIndexEventManager extends IndexEventManager {
             default:
                 logger.warn("Action '" + eventHandler.getIndexAction(event) + "' not supported, nothing has been done.");
         }
+    }
+
+    public void setIndexingService(IndexingService indexingService) {
+        this.indexingService = indexingService;
     }
 }
