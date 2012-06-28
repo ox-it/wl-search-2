@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<registration>
+    <tool id="sakai.search2"
+          title="Search2"
+          description="Allowing you to search stuff."/>
+</registration>
