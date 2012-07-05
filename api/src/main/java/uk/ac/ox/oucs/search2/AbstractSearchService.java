@@ -8,10 +8,7 @@ import org.slf4j.LoggerFactory;
 import uk.ac.ox.oucs.search2.filter.SearchFilter;
 import uk.ac.ox.oucs.search2.result.SearchResultList;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Colin Hebert
@@ -25,7 +22,7 @@ public abstract class AbstractSearchService implements SearchService {
 
     @Override
     public SearchResultList search(String searchQuery) {
-        return search(searchQuery, getAllUserSites(), 0, defaultLength, searchFilters);
+        return search(searchQuery, getAllViewableSites(), 0, defaultLength, searchFilters);
     }
 
     @Override
@@ -35,7 +32,7 @@ public abstract class AbstractSearchService implements SearchService {
 
     @Override
     public SearchResultList search(String searchQuery, int start, int length) {
-        return search(searchQuery, getAllUserSites(), start, length, searchFilters);
+        return search(searchQuery, getAllViewableSites(), start, length, searchFilters);
     }
 
     @Override
@@ -50,17 +47,23 @@ public abstract class AbstractSearchService implements SearchService {
         this.searchFilters = searchFilters;
     }
 
-    private Collection<String> getAllUserSites() {
+    private Collection<String> getAllViewableSites() {
         try {
             logger.info("Finding every site to in which the current user is a member.");
             String userId = userDirectoryService.getCurrentUser().getId();
-            List<Site> sites = siteService.getSites(SiteService.SelectionType.ACCESS, null, null, null, null, null);
-            Collection<String> siteIds = new ArrayList<String>(sites.size() + 1);
-            for (Site site : sites) {
+
+            //TODO: Check that PUBVIEW and ACCESS aren't redundant
+            List<Site> userSites = siteService.getSites(SiteService.SelectionType.ACCESS, null, null, null, null, null);
+            List<Site> publicSites = siteService.getSites(SiteService.SelectionType.PUBVIEW, null, null, null, null, null);
+            Collection<String> siteIds = new HashSet<String>(userSites.size() + publicSites.size() + 1);
+            for (Site site : userSites) {
+                siteIds.add(site.getId());
+            }
+            for (Site site : publicSites) {
                 siteIds.add(site.getId());
             }
             siteIds.add(siteService.getUserSiteId(userId));
-            logger.debug("Found " + siteIds.size() + " sites: " + siteIds);
+            logger.debug("Found " + siteIds.size() + " userSites: " + siteIds);
             return siteIds;
         } catch (Exception e) {
             logger.warn("Couldn't get every site for the current user.", e);
