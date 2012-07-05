@@ -1,0 +1,43 @@
+<?xml encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<wicket:head>
+    <script type="text/javascript" src="/library/js/jquery/1.4.2/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="/library/js/jquery/ui/1.8.4/jquery-ui-1.8.4.full.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/library/js/jquery/ui/1.8.4/css/ui-lightness/jquery-ui-1.8.4.full.css" />
+    <script>
+        $(function() {
+        $( "#tabs" ).tabs();
+        });
+    </script>
+</wicket:head>
+<wicket:panel>
+    <div class="suggestion"><a wicket:id="suggestionLink"><span wicket:id="suggestion">Term name</span></a></div>
+    <wicket:enclosure child="resultlist">
+        <span wicket:id="navigator">[dataview navigator]</span>
+
+        <div id="tabs">
+            <ul>
+                <li><a href="#results">Results</a></li>
+                <li><a href="#tags">tags</a></li>
+            </ul>
+            <div id="results">
+                <div class="result" wicket:id="resultlist">
+                    <span class="tool"><span wicket:id="tool">Tool name</span>:</span>
+                    <a wicket:id="titlelink">Result title</a>
+
+                    <p wicket:id="text">Search result, with possibly highlights on the keywords</p>
+                    <a wicket:id="footlink">plain link</a>
+                </div>
+            </div>
+            <div id="tags">
+                <span class="tag" wicket:id="tagList">
+                    <a wicket:id="taglink"><span wicket:id="term">Term</span></a>
+                </span>
+            </div>
+        </div>
+    </wicket:enclosure>
+</wicket:panel>
+</html>
