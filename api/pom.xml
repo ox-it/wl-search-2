@@ -11,6 +11,10 @@
     <artifactId>search2-api</artifactId>
     <packaging>jar</packaging>
 
+    <properties>
+        <deploy.target>shared</deploy.target>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.sakaiproject.kernel</groupId>
