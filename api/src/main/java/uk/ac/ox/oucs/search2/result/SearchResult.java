@@ -2,10 +2,12 @@ package uk.ac.ox.oucs.search2.result;
 
 import uk.ac.ox.oucs.search2.content.Content;
 
+import java.io.Serializable;
+
 /**
  * @author Colin Hebert
  */
-public interface SearchResult {
+public interface SearchResult extends Serializable {
     Content getContent();
 
     double getScore();
