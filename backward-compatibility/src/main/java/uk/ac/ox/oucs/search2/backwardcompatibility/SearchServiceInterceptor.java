@@ -184,7 +184,7 @@ public class SearchServiceInterceptor implements SearchService, SearchIndexBuild
 
     @Override
     public List<EntityContentProducer> getContentProducers() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
@@ -206,7 +206,7 @@ public class SearchServiceInterceptor implements SearchService, SearchIndexBuild
 
     @Override
     public List<SearchBuilderItem> getAllSearchItems() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
@@ -221,12 +221,12 @@ public class SearchServiceInterceptor implements SearchService, SearchIndexBuild
 
     @Override
     public List<SearchBuilderItem> getSiteMasterSearchItems() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
     public List<SearchBuilderItem> getGlobalMasterSearchItems() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
@@ -241,7 +241,42 @@ public class SearchServiceInterceptor implements SearchService, SearchIndexBuild
 
     @Override
     public SearchStatus getSearchStatus() {
-        return null;
+        return new SearchStatus() {
+            @Override
+            public String getLastLoad() {
+                return null;
+            }
+
+            @Override
+            public String getLoadTime() {
+                return null;
+            }
+
+            @Override
+            public String getCurrentWorker() {
+                return null;
+            }
+
+            @Override
+            public String getCurrentWorkerETC() {
+                return null;
+            }
+
+            @Override
+            public List getWorkerNodes() {
+                return Collections.emptyList();
+            }
+
+            @Override
+            public String getNDocuments() {
+                return null;
+            }
+
+            @Override
+            public String getPDocuments() {
+                return null;
+            }
+        };
     }
 
     @Override
@@ -251,7 +286,7 @@ public class SearchServiceInterceptor implements SearchService, SearchIndexBuild
 
     @Override
     public List getSegmentInfo() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
