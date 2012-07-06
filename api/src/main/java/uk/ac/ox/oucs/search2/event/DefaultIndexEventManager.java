@@ -1,9 +1,9 @@
 package uk.ac.ox.oucs.search2.event;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.sakaiproject.event.api.Event;
 import org.sakaiproject.event.api.NotificationService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import uk.ac.ox.oucs.search2.IndexingService;
 
 import java.util.Collection;
@@ -15,7 +15,7 @@ import java.util.Map;
  * @author Colin Hebert
  */
 public class DefaultIndexEventManager extends IndexEventManager {
-    private static final Logger logger = LoggerFactory.getLogger(DefaultIndexEventManager.class);
+    private final static Log logger = LogFactory.getLog(DefaultIndexEventManager.class);
     private IndexingService indexingService;
     private Map<String, Collection<IndexEventHandler>> indexEventHandlers;
 

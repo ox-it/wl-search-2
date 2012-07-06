@@ -1,10 +1,10 @@
 package uk.ac.ox.oucs.search2;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.sakaiproject.site.api.Site;
 import org.sakaiproject.site.api.SiteService;
 import org.sakaiproject.user.api.UserDirectoryService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import uk.ac.ox.oucs.search2.filter.SearchFilter;
 import uk.ac.ox.oucs.search2.result.SearchResultList;
 
@@ -14,7 +14,7 @@ import java.util.*;
  * @author Colin Hebert
  */
 public abstract class AbstractSearchService implements SearchService {
-    private static final Logger logger = LoggerFactory.getLogger(AbstractSearchService.class);
+    private final static Log logger = LogFactory.getLog(AbstractSearchService.class);
     private int defaultLength = 10;
     private Iterable<SearchFilter> searchFilters;
     private UserDirectoryService userDirectoryService;

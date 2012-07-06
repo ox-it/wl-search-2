@@ -1,7 +1,7 @@
 package uk.ac.ox.oucs.search2;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import uk.ac.ox.oucs.search2.content.ContentProducer;
 
 import java.util.Collection;
@@ -10,7 +10,7 @@ import java.util.Collection;
  * @author Colin Hebert
  */
 public class DefaultContentProducerRegistry implements ContentProducerRegistry {
-    private static final Logger logger = LoggerFactory.getLogger(DefaultContentProducerRegistry.class);
+    private final static Log logger = LogFactory.getLog(DefaultContentProducerRegistry.class);
     private Collection<ContentProducer> contentProducers;
 
     @Override
