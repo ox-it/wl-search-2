@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * @author Colin Hebert
  */
-public class DefaultIndexEventManager extends IndexEventManager {
+public class DefaultIndexEventManager extends AbstractIndexEventManager {
     private final static Log logger = LogFactory.getLog(DefaultIndexEventManager.class);
     private IndexingService indexingService;
     private Map<String, Collection<IndexEventHandler>> indexEventHandlers;

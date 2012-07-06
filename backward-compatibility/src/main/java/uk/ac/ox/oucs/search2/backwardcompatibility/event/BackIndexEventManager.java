@@ -8,8 +8,8 @@ import org.sakaiproject.search.model.SearchBuilderItem;
 import uk.ac.ox.oucs.search2.content.Content;
 import uk.ac.ox.oucs.search2.content.ReaderContent;
 import uk.ac.ox.oucs.search2.content.StringContent;
+import uk.ac.ox.oucs.search2.event.AbstractIndexEventManager;
 import uk.ac.ox.oucs.search2.event.IndexEventHandler;
-import uk.ac.ox.oucs.search2.event.IndexEventManager;
 
 import java.io.Reader;
 import java.util.Iterator;
@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * @author Colin Hebert
  */
-public class BackIndexEventManager extends IndexEventManager {
+public class BackIndexEventManager extends AbstractIndexEventManager {
     private SearchIndexBuilder searchIndexBuilder;
     private BackAdditionalEventHandler eventHandler;
 
