@@ -20,7 +20,7 @@ public class BackSearchService extends AbstractSearchService {
     @Override
     protected SearchResultList search(String searchQuery, Collection<String> contexts, int start, int length, Iterable<SearchFilter> filterChain) {
         try {
-            SearchList searchList = searchService.search(searchQuery, new ArrayList<String>(contexts), start, length, null, null);
+            SearchList searchList = searchService.search(searchQuery, new ArrayList<String>(contexts), start, start+length, null, null);
             return new BackSearchResultList(searchList, filterChain);
         } catch (InvalidSearchQueryException e) {
             //TODO: Log that
