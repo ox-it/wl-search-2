@@ -15,10 +15,12 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>search2-api</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.sakaiproject.search</groupId>
             <artifactId>search-api</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
