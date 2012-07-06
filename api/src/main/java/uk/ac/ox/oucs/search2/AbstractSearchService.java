@@ -8,7 +8,10 @@ import org.sakaiproject.user.api.UserDirectoryService;
 import uk.ac.ox.oucs.search2.filter.SearchFilter;
 import uk.ac.ox.oucs.search2.result.SearchResultList;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * @author Colin Hebert
