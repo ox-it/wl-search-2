@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import uk.ac.ox.oucs.search2.content.ContentProducer;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Collection;
  */
 public class DefaultContentProducerRegistry implements ContentProducerRegistry {
     private final static Log logger = LogFactory.getLog(DefaultContentProducerRegistry.class);
-    private Collection<ContentProducer> contentProducers;
+    private Collection<ContentProducer> contentProducers = new ArrayList<ContentProducer>();
 
     @Override
     public void registerContentProducer(ContentProducer contentProducer) {
