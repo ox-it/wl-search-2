@@ -43,6 +43,7 @@
         <module>backward-compatibility</module>
         <module>tool</module>
         <module>pack</module>
+        <module>solr</module>
     </modules>
 
     <dependencyManagement>
