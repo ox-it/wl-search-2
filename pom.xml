@@ -59,6 +59,11 @@
                 <artifactId>search2-backward-compatibility</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>search2-solr</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>javax.servlet</groupId>
