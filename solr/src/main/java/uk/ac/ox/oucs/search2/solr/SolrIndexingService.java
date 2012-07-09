@@ -86,7 +86,7 @@ public class SolrIndexingService extends AbstractIndexingService {
 
     @Override
     public void indexSite(String eventHandlerName, Iterable<Content> contents, String site) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        indexContent(eventHandlerName, contents);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class SolrIndexingService extends AbstractIndexingService {
 
     @Override
     public void indexAll(String eventHandlerName, Iterable<Content> contents) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        indexContent(eventHandlerName, contents);
     }
 
     @Override
