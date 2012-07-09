@@ -15,6 +15,7 @@ import uk.ac.ox.oucs.search2.content.Content;
 import uk.ac.ox.oucs.search2.content.ReaderContent;
 import uk.ac.ox.oucs.search2.content.StreamContent;
 import uk.ac.ox.oucs.search2.content.StringContent;
+import uk.ac.ox.oucs.search2.solr.request.ReaderUpdateRequest;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -59,8 +60,7 @@ public class SolrIndexingService extends AbstractIndexingService {
                     indexRequest = getStreamIndexRequest(document, ((StreamContent) content).getContent());
                 } else if (content instanceof ReaderContent) {
                     document.addField(SolrSchemaConstants.CONTENT_FIELD, ((ReaderContent) content).getContent());
-                    //indexRequest = new ReaderUpdateRequest().add(document);
-                    indexRequest = null;
+                    indexRequest = new ReaderUpdateRequest().add(document);
                 } else if (content instanceof StringContent) {
                     document.addField(SolrSchemaConstants.CONTENT_FIELD, ((StringContent) content).getContent());
                     indexRequest = new UpdateRequest().add(document);
