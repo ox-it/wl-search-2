@@ -90,8 +90,16 @@ public class SolrIndexingService extends AbstractIndexingService {
     }
 
     @Override
-    public void unindexSite(String eventHandlerName, String site) {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public void unindexSite(String eventHandlerName, String siteId) {
+        logger.info("Removing content for eventHandler '" + eventHandlerName + "' and siteId '" + siteId + "'");
+        try {
+            solrServer.deleteByQuery(SolrSchemaConstants.EVENTHANDLER_FIELD + ':' + eventHandlerName +
+                    " AND " + SolrSchemaConstants.SITEID_FIELD + ':' + siteId);
+        } catch (SolrServerException e) {
+            logger.warn("Couldn't clean the index for eventHandler '" + eventHandlerName + "' and siteId '" + siteId + "'", e);
+        } catch (IOException e) {
+            logger.error("Couln't access the solr server", e);
+        }
     }
 
     @Override
@@ -101,6 +109,13 @@ public class SolrIndexingService extends AbstractIndexingService {
 
     @Override
     public void unindexAll(String eventHandlerName) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        logger.info("Removing content for eventHandler '" + eventHandlerName + "'");
+        try {
+            solrServer.deleteByQuery(SolrSchemaConstants.EVENTHANDLER_FIELD + ':' + eventHandlerName);
+        } catch (SolrServerException e) {
+            logger.warn("Couldn't clean the index for eventHandler '" + eventHandlerName + "'", e);
+        } catch (IOException e) {
+            logger.error("Couln't access the solr server", e);
+        }
     }
 }
