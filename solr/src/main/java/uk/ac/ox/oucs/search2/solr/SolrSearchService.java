@@ -44,7 +44,7 @@ public class SolrSearchService extends AbstractSearchService {
 
             if (!contexts.isEmpty()) {
                 StringBuilder sb = new StringBuilder();
-                sb.append('+').append(SolrSchemaConstants.CONTEXT_FIELD).append(":");
+                sb.append('+').append(SolrSchemaConstants.SITEID_FIELD).append(":");
                 sb.append('(');
                 for (Iterator<String> contextIterator = contexts.iterator(); contextIterator.hasNext(); ) {
                     sb.append('"').append(contextIterator.next()).append('"');
