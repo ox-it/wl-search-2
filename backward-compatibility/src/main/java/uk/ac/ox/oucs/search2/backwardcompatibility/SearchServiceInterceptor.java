@@ -4,9 +4,11 @@ import org.sakaiproject.event.api.Event;
 import org.sakaiproject.event.api.Notification;
 import org.sakaiproject.search.api.*;
 import org.sakaiproject.search.model.SearchBuilderItem;
+import uk.ac.ox.oucs.search2.ContentProducerRegistry;
 import uk.ac.ox.oucs.search2.backwardcompatibility.content.BackContent;
 import uk.ac.ox.oucs.search2.backwardcompatibility.event.BackIndexEventHandler;
 import uk.ac.ox.oucs.search2.content.Content;
+import uk.ac.ox.oucs.search2.content.ContentProducer;
 import uk.ac.ox.oucs.search2.event.IndexEventHandler;
 import uk.ac.ox.oucs.search2.event.IndexEventManager;
 
@@ -23,9 +25,11 @@ import java.util.Map;
  */
 public class SearchServiceInterceptor implements SearchService, SearchIndexBuilder {
     private final IndexEventManager indexEventManager;
+    private final ContentProducerRegistry contentProducerRegistry;
 
-    public SearchServiceInterceptor(IndexEventManager indexEventManager) {
+    public SearchServiceInterceptor(IndexEventManager indexEventManager, ContentProducerRegistry contentProducerRegistry) {
         this.indexEventManager = indexEventManager;
+        this.contentProducerRegistry = contentProducerRegistry;
     }
 
     @Override
@@ -67,6 +71,22 @@ public class SearchServiceInterceptor implements SearchService, SearchIndexBuild
     @Override
     public void registerEntityContentProducer(final EntityContentProducer ecp) {
         indexEventManager.addContentEventHandler(new BackIndexEventHandler(ecp));
+        contentProducerRegistry.registerContentProducer(new ContentProducer() {
+            @Override
+            public Content getContent(final String reference) {
+                return BackContent.extractContent(reference, ecp);
+            }
+
+            @Override
+            public boolean isHandled(String reference) {
+                return ecp.matches(reference);
+            }
+
+            @Override
+            public boolean isReadable(String reference) {
+                return ecp.canRead(reference);
+            }
+        });
     }
 
     //-------------------------------------------------------------------------------
