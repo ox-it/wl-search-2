@@ -24,8 +24,6 @@ public class TermWeigher {
 
     private long highestFrequency;
 
-    private Map<String, Long> terms;
-
     private Comparator<Term> postSort = ALPHABETICAL_SORT;
 
     public static final Comparator<Term> ALPHABETICAL_SORT = new Comparator<Term>() {
@@ -48,12 +46,8 @@ public class TermWeigher {
         }
     };
 
-    public TermWeigher(Map<String, Long> termMap) {
-        this.terms = termMap;
-    }
-
-    public List<Term> getWeighedTerms() {
-        List<Term> terms = getTopTerms(this.terms);
+    public List<Term> getWeighedTerms(Map<String, Long> allTerms) {
+        List<Term> terms = getTopTerms(allTerms);
         if (!relativeWeigher)
             highestFrequency = getHighestFrequency(terms);
 
