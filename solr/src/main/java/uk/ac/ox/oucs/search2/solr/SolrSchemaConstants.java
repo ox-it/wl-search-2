@@ -17,4 +17,7 @@ public final class SolrSchemaConstants {
     public static final String CONTENT_FIELD = "contents";
 
     public static final String PROPERTY_PREFIX = "property_";
+    public static final String SOLRCELL_UPREFIX = "tika_";
+    public static final String SOLRCELL_LITERAL = "literal.";
+    public static final String SOLRCELL_PATH = "/update/extract";
 }

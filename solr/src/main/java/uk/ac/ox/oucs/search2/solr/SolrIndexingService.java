@@ -3,8 +3,11 @@ package uk.ac.ox.oucs.search2.solr;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.request.ContentStreamUpdateRequest;
 import org.apache.solr.client.solrj.request.UpdateRequest;
 import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.common.SolrInputField;
+import org.apache.solr.common.util.ContentStreamBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.ac.ox.oucs.search2.AbstractIndexingService;
@@ -14,6 +17,7 @@ import uk.ac.ox.oucs.search2.content.StreamContent;
 import uk.ac.ox.oucs.search2.content.StringContent;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 
@@ -52,7 +56,7 @@ public class SolrIndexingService extends AbstractIndexingService {
                 }
 
                 if (content instanceof StreamContent) {
-                    indexRequest = null;
+                    indexRequest = getStreamIndexRequest(document, ((StreamContent) content).getContent());
                 } else if (content instanceof ReaderContent) {
                     document.addField(SolrSchemaConstants.CONTENT_FIELD, ((ReaderContent) content).getContent());
                     //indexRequest = new ReaderUpdateRequest().add(document);
@@ -124,6 +128,27 @@ public class SolrIndexingService extends AbstractIndexingService {
         } catch (IOException e) {
             logger.error("Couln't access the solr server", e);
         }
+    }
+
+    private ContentStreamUpdateRequest getStreamIndexRequest(SolrInputDocument document, final InputStream contentStrean) {
+        ContentStreamUpdateRequest contentStreamUpdateRequest = new ContentStreamUpdateRequest(SolrSchemaConstants.SOLRCELL_PATH);
+        contentStreamUpdateRequest.setParam("fmap.content", SolrSchemaConstants.CONTENT_FIELD);
+        contentStreamUpdateRequest.setParam("uprefix", SolrSchemaConstants.SOLRCELL_UPREFIX);
+        ContentStreamBase contentStreamBase = new ContentStreamBase() {
+            @Override
+            public InputStream getStream() throws IOException {
+                return ((StreamContent) contentStrean).getContent();
+            }
+        };
+        contentStreamUpdateRequest.addContentStream(contentStreamBase);
+        for (SolrInputField field : document) {
+            contentStreamUpdateRequest.setParam("fmap.sakai_" + field.getName(), field.getName());
+            for (Object o : field) {
+                //The "sakai_" part is due to SOLR-3386, this fix should be temporary
+                contentStreamUpdateRequest.setParam(SolrSchemaConstants.SOLRCELL_LITERAL + "sakai_" + field.getName(), o.toString());
+            }
+        }
+        return contentStreamUpdateRequest;
     }
 
     /**
