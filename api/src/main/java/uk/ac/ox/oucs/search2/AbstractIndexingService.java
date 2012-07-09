@@ -7,14 +7,14 @@ import uk.ac.ox.oucs.search2.content.Content;
  */
 public abstract class AbstractIndexingService implements IndexingService {
     @Override
-    public void reindexSite(String eventHandlerName, Iterable<Content> content, String site) {
+    public void reindexSite(String eventHandlerName, Iterable<Content> contents, String site) {
         unindexSite(eventHandlerName, site);
-        indexSite(eventHandlerName, content, site);
+        indexSite(eventHandlerName, contents, site);
     }
 
     @Override
-    public void reindexAll(String eventHandlerName, Iterable<Content> content) {
+    public void reindexAll(String eventHandlerName, Iterable<Content> contents) {
         unindexAll(eventHandlerName);
-        indexAll(eventHandlerName, content);
+        indexAll(eventHandlerName, contents);
     }
 }

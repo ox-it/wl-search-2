@@ -11,22 +11,22 @@ public class BackIndexingService extends AbstractIndexingService {
     private SearchIndexBuilder searchIndexBuilder;
 
     @Override
-    public void indexContent(String eventHandlerName, Iterable<Content> content) {
+    public void indexContent(String eventHandlerName, Iterable<Content> contents) {
         throw new UnsupportedOperationException("The previous search service doesn't support manual indexation");
     }
 
     @Override
-    public void unindexContent(String eventHandlerName, Iterable<Content> content) {
+    public void unindexContent(String eventHandlerName, Iterable<Content> contents) {
         throw new UnsupportedOperationException("The previous search service doesn't support manual removal");
     }
 
     @Override
-    public void indexSite(String eventHandlerName, Iterable<Content> content, String site) {
+    public void indexSite(String eventHandlerName, Iterable<Content> contents, String site) {
         searchIndexBuilder.refreshIndex(site);
     }
 
     @Override
-    public void reindexSite(String eventHandlerName, Iterable<Content> content, String site) {
+    public void reindexSite(String eventHandlerName, Iterable<Content> contents, String site) {
         searchIndexBuilder.rebuildIndex(site);
     }
 
@@ -36,12 +36,12 @@ public class BackIndexingService extends AbstractIndexingService {
     }
 
     @Override
-    public void indexAll(String eventHandlerName, Iterable<Content> content) {
+    public void indexAll(String eventHandlerName, Iterable<Content> contents) {
         searchIndexBuilder.refreshIndex();
     }
 
     @Override
-    public void reindexAll(String eventHandlerName, Iterable<Content> content) {
+    public void reindexAll(String eventHandlerName, Iterable<Content> contents) {
         searchIndexBuilder.rebuildIndex();
     }
 
