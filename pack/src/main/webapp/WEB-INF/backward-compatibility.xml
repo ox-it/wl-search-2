@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean id="uk.ac.ox.oucs.search2.backwardcompatibility.BackIndexingService"
+          class="uk.ac.ox.oucs.search2.backwardcompatibility.BackIndexingService">
+        <property name="searchIndexBuilder" ref="${search2.search1.indexbuilder}"/>
+    </bean>
+    <bean id="uk.ac.ox.oucs.search2.backwardcompatibility.BackSearchService"
+          class="uk.ac.ox.oucs.search2.backwardcompatibility.BackSearchService"
+          parent="uk.ac.ox.oucs.search2.backwardcompatibility.AbstractSearchService">
+        <property name="searchService" ref="${search2.search1.searchservice}"/>
+    </bean>
+    <bean id="uk.ac.ox.oucs.search2.backwardcompatibility.SearchServiceInterceptor"
+          class="uk.ac.ox.oucs.search2.backwardcompatibility.SearchServiceInterceptor">
+        <constructor-arg ref="uk.ac.ox.oucs.search2.backwardcompatibility.event.BackIndexEventManager" />
+        <constructor-arg ref="uk.ac.ox.oucs.search2.ContentProducerRegistry" />
+    </bean>
+    <bean id="uk.ac.ox.oucs.search2.backwardcompatibility.event.BackIndexEventManager" class="uk.ac.ox.oucs.search2.backwardcompatibility.event.BackIndexEventManager"
+          parent="uk.ac.ox.oucs.search2.event.AbstractIndexEventManager">
+        <property name="searchIndexBuilder" ref="${search2.search1.indexbuilder}"/>
+    </bean>
+</beans>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean id="uk.ac.ox.oucs.search2.backwardcompatibility.AbstractSearchService"
+          class="uk.ac.ox.oucs.search2.AbstractSearchService" abstract="true">
+        <property name="userDirectoryService" ref="org.sakaiproject.user.api.UserDirectoryService"/>
+        <property name="siteService" ref="org.sakaiproject.site.api.SiteService"/>
+        <property name="searchFilters">
+            <list>
+                <bean class="uk.ac.ox.oucs.search2.filter.SecuritySearchFilter">
+                    <property name="contentProducerRegistry" ref="uk.ac.ox.oucs.search2.ContentProducerRegistry"/>
+                </bean>
+            </list>
+        </property>
+        <property name="defaultLength" value="25" />
+    </bean>
+
+    <bean id="uk.ac.ox.oucs.search2.event.AbstractIndexEventManager" class="uk.ac.ox.oucs.search2.event.AbstractIndexEventManager" abstract="true">
+        <constructor-arg ref="org.sakaiproject.event.api.NotificationService" />
+    </bean>
+    <bean id="uk.ac.ox.oucs.search2.event.DefaultIndexEventManager" class="uk.ac.ox.oucs.search2.event.DefaultIndexEventManager" parent="uk.ac.ox.oucs.search2.event.AbstractIndexEventManager">
+        <property name="indexingService" ref="uk.ac.ox.oucs.search2.IndexingService" />
+    </bean>
+
+    <bean id="uk.ac.ox.oucs.search2.DefaultContentProducerRegistry" class="uk.ac.ox.oucs.search2.DefaultContentProducerRegistry" />
+
+</beans>

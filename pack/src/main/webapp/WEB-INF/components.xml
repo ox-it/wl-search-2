@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <alias alias="uk.ac.ox.oucs.search2.IndexingService" name="${search2.indexservice.impl}"/>
+    <alias alias="uk.ac.ox.oucs.search2.SearchService" name="${search2.searchservice.impl}"/>
+    <alias alias="uk.ac.ox.oucs.search2.ContentProducerRegistry" name="${search2.contentproducerregistry.impl}"/>
+    <alias alias="uk.ac.ox.oucs.search2.event.IndexEventManager" name="${search2.indexeventmanager.impl}"/>
+
+    <import resource="defaults.xml" />
+    <import resource="backward-compatibility.xml"/>
+</beans>
