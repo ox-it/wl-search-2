@@ -15,4 +15,6 @@ public final class SolrSchemaConstants {
     public static final String EVENTHANDLER_FIELD = "eventhandler";
     public static final String TIMESTAMP_FIELD = "timestamp";
     public static final String CONTENT_FIELD = "contents";
+
+    public static final String PROPERTY_PREFIX = "property_";
 }

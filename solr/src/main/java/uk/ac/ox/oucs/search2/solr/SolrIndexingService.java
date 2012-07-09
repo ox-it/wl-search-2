@@ -14,6 +14,8 @@ import uk.ac.ox.oucs.search2.content.StreamContent;
 import uk.ac.ox.oucs.search2.content.StringContent;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
 
 /**
  * @author Colin Hebert
@@ -44,15 +46,20 @@ public class SolrIndexingService extends AbstractIndexingService {
                 document.addField(SolrSchemaConstants.EVENTHANDLER_FIELD, eventHandlerName);
                 document.addField(SolrSchemaConstants.TIMESTAMP_FIELD, System.currentTimeMillis());
 
+                //Add the custom properties
+                for (Map.Entry<String, Collection<String>> entry : content.getProperties().entrySet()) {
+                    document.addField(SolrSchemaConstants.PROPERTY_PREFIX + toSolrFieldName(entry.getKey()), entry.getValue());
+                }
+
                 if (content instanceof StreamContent) {
-                    indexRequest=null;
+                    indexRequest = null;
                 } else if (content instanceof ReaderContent) {
                     document.addField(SolrSchemaConstants.CONTENT_FIELD, ((ReaderContent) content).getContent());
                     //indexRequest = new ReaderUpdateRequest().add(document);
-                    indexRequest=null;
+                    indexRequest = null;
                 } else if (content instanceof StringContent) {
                     document.addField(SolrSchemaConstants.CONTENT_FIELD, ((StringContent) content).getContent());
-                   indexRequest = new UpdateRequest().add(document);
+                    indexRequest = new UpdateRequest().add(document);
                 } else {
                     //TODO: Log/exception??
                     continue;
@@ -117,5 +124,25 @@ public class SolrIndexingService extends AbstractIndexingService {
         } catch (IOException e) {
             logger.error("Couln't access the solr server", e);
         }
+    }
+
+    /**
+     * Replace special characters, turn to lower case and avoid repetitive '_'
+     *
+     * @param propertyName String to filter
+     * @return a filtered name more appropriate to use with solr
+     */
+    private static String toSolrFieldName(String propertyName) {
+        StringBuilder sb = new StringBuilder(propertyName.length());
+        boolean lastUnderscore = false;
+        for (Character c : propertyName.toLowerCase().toCharArray()) {
+            if ((c < 'a' || c > 'z') && (c < '0' || c > '9'))
+                c = '_';
+            if (!lastUnderscore || c != '_')
+                sb.append(c);
+            lastUnderscore = (c == '_');
+        }
+        logger.debug("Transformed the '" + propertyName + "' property into: '" + sb + "'");
+        return sb.toString();
     }
 }
