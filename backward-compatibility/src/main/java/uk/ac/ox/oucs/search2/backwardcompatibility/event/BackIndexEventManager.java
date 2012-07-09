@@ -12,6 +12,7 @@ import uk.ac.ox.oucs.search2.event.AbstractIndexEventManager;
 import uk.ac.ox.oucs.search2.event.IndexEventHandler;
 
 import java.io.Reader;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -151,7 +152,7 @@ public class BackIndexEventManager extends AbstractIndexEventManager {
 
         @Override
         public Iterator<String> getSiteContentIterator(String context) {
-            return null;
+            return Collections.<String>emptyList().iterator();
         }
 
         @Override
