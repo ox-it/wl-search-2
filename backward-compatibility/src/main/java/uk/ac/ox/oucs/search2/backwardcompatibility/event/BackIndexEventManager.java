@@ -137,7 +137,10 @@ public class BackIndexEventManager extends AbstractIndexEventManager {
 
         @Override
         public String getTool() {
-            return getUniqueContent().getTool();
+            if (event == null)
+                return "Unknown";
+            else
+                return getUniqueContent().getTool();
         }
 
         @Override
