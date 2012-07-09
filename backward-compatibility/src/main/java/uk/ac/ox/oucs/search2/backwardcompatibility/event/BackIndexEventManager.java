@@ -20,7 +20,7 @@ import java.util.Map;
  */
 public class BackIndexEventManager extends AbstractIndexEventManager {
     private SearchIndexBuilder searchIndexBuilder;
-    private BackAdditionalEventHandler eventHandler;
+    private final BackAdditionalEventHandler eventHandler;
 
     public BackIndexEventManager(NotificationService notificationService) {
         super(notificationService);
@@ -31,7 +31,10 @@ public class BackIndexEventManager extends AbstractIndexEventManager {
     @Override
     public void addContentEventHandler(IndexEventHandler indexEventHandler) {
         super.addContentEventHandler(indexEventHandler);
-        searchIndexBuilder.registerEntityContentProducer(new BackEventEntityContentProducer(indexEventHandler));
+        if (indexEventHandler instanceof BackIndexEventHandler)
+            searchIndexBuilder.registerEntityContentProducer(((BackIndexEventHandler) indexEventHandler).getEntityContentProducer());
+         else
+            searchIndexBuilder.registerEntityContentProducer(new BackEventEntityContentProducer(indexEventHandler));
     }
 
     @Override
