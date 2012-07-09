@@ -2,6 +2,7 @@ package uk.ac.ox.oucs.search2.backwardcompatibility.result;
 
 import org.sakaiproject.search.api.SearchList;
 import org.sakaiproject.search.api.TermFrequency;
+import uk.ac.ox.oucs.search2.filter.FilterChain;
 import uk.ac.ox.oucs.search2.filter.SearchFilter;
 import uk.ac.ox.oucs.search2.result.AbstractSearchResultList;
 import uk.ac.ox.oucs.search2.result.SearchResult;
@@ -15,28 +16,58 @@ import java.util.Map;
 /**
  * @author Colin Hebert
  */
-public class BackSearchResultList extends AbstractSearchResultList {
-    private SearchList searchList;
+public class BackSearchResultList extends AbstractSearchResultList<SearchList> {
+    private long numberResultsFound;
+    private long startCurrentSelection;
+
     private Map<String, Long> termFrequency;
 
     public BackSearchResultList(SearchList searchList) {
-        super(convertSearchList(searchList));
-        this.searchList = searchList;
+        super(searchList);
+        numberResultsFound = searchList.getFullSize();
+        startCurrentSelection = searchList.getStart();
     }
 
     public BackSearchResultList(SearchList searchList, Iterable<SearchFilter> searchFilters) {
-        super(convertSearchList(searchList), searchFilters);
-        this.searchList = searchList;
+        super(searchList, searchFilters);
+        numberResultsFound = searchList.getFullSize();
+        startCurrentSelection = searchList.getStart();
+    }
+
+    /**
+     * {@inheritDoc}
+     * Extract the term frequencies at the same time that result are extracted. This avoids to do another loop on each result
+     * @param result
+     * @param filters
+     * @return
+     */
+    @Override
+    protected List<? extends SearchResult> extractResults(SearchList result, Iterable<SearchFilter> filters) {
+        termFrequency = new HashMap<String, Long>();
+        List<SearchResult> searchResults = new ArrayList<SearchResult>(result.size());
+        for (org.sakaiproject.search.api.SearchResult originalSearchResult : result) {
+            SearchResult searchResult = new FilterChain(filters).filter(new BackSearchResult(originalSearchResult));
+            searchResults.add(searchResult);
+            if (!searchResult.isCensored()) {
+                try {
+                    extractResultTermFrequencies(originalSearchResult.getTerms());
+                } catch (IOException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+
+        }
+        return searchResults;
     }
 
     @Override
     public long getNumberResultsFound() {
-        return searchList.getFullSize();
+        return numberResultsFound;
     }
 
     @Override
     public long getStartCurrentSelection() {
-        return searchList.getStart();
+        return startCurrentSelection;
     }
 
     @Override
@@ -46,16 +77,6 @@ public class BackSearchResultList extends AbstractSearchResultList {
 
     @Override
     public Map<String, Long> getTermFrequencies() {
-        if (termFrequency == null) {
-            termFrequency = new HashMap<String, Long>();
-            for (org.sakaiproject.search.api.SearchResult searchResult : searchList) {
-                try {
-                    extractResultTermFrequencies(searchResult.getTerms());
-                } catch (IOException e) {
-                    //Log that
-                }
-            }
-        }
         return termFrequency;
     }
 
@@ -71,13 +92,5 @@ public class BackSearchResultList extends AbstractSearchResultList {
             currentFrequency += frequencies[i];
             termFrequency.put(terms[i], currentFrequency);
         }
-    }
-
-    public static List<SearchResult> convertSearchList(SearchList searchList) {
-        List<SearchResult> searchResults = new ArrayList<SearchResult>(searchList.size());
-        for (org.sakaiproject.search.api.SearchResult searchResult : searchList) {
-            searchResults.add(new BackSearchResult(searchResult));
-        }
-        return searchResults;
     }
 }

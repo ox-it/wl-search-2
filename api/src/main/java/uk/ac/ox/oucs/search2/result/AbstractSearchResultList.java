@@ -8,21 +8,18 @@ import java.util.*;
 /**
  * @author Colin Hebert
  */
-public abstract class AbstractSearchResultList implements SearchResultList {
+public abstract class AbstractSearchResultList<T> implements SearchResultList {
     private final List<SearchResult> results;
 
-    protected AbstractSearchResultList(List<SearchResult> results) {
-        this.results = Collections.unmodifiableList(results);
+    protected AbstractSearchResultList(T result) {
+        this(result, Collections.<SearchFilter>emptyList());
     }
 
-    protected AbstractSearchResultList(List<SearchResult> results, Iterable<SearchFilter> searchFilters) {
-        List<SearchResult> filteredResults = new ArrayList<SearchResult>(results.size());
-        for (SearchResult searchResult : results) {
-            SearchResult filteredResult = new FilterChain(searchFilters).filter(searchResult);
-            filteredResults.add(filteredResult);
-        }
-        this.results = Collections.unmodifiableList(filteredResults);
+    protected AbstractSearchResultList(T result, Iterable<SearchFilter> searchFilters) {
+        this.results = Collections.unmodifiableList(extractResults(result, searchFilters));
     }
+
+    protected abstract List<? extends SearchResult> extractResults(T result, Iterable<SearchFilter> filters);
 
     //----------------------------------------
     // Methods from List delegated internally
