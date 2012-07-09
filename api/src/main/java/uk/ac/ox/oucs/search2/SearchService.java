@@ -17,8 +17,6 @@ public interface SearchService {
 
     SearchResultList search(String searchQuery, Collection<String> contexts, int start, int length);
 
-    long getIndexSize();
-
     String getSuggestion(String searchString);
 
     void setSearchFilters(Iterable<SearchFilter> searchFilters);

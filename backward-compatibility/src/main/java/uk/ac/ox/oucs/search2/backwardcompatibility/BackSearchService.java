@@ -29,11 +29,6 @@ public class BackSearchService extends AbstractSearchService {
     }
 
     @Override
-    public long getIndexSize() {
-        return searchService.getNDocs();
-    }
-
-    @Override
     public String getSuggestion(String searchString) {
         return searchService.getSearchSuggestion(searchString);
     }
