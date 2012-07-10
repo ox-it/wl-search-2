@@ -10,6 +10,7 @@ import uk.ac.ox.oucs.search2.AbstractSearchService;
 import uk.ac.ox.oucs.search2.exception.InvalidSearchQueryException;
 import uk.ac.ox.oucs.search2.filter.SearchFilter;
 import uk.ac.ox.oucs.search2.result.SearchResultList;
+import uk.ac.ox.oucs.search2.solr.result.SolrSearchResultList;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -58,7 +59,7 @@ public class SolrSearchService extends AbstractSearchService {
             logger.debug("Searching with Solr : " + searchQuery);
             query.setQuery(searchQuery);
             QueryResponse rsp = solrServer.query(query);
-            return null; //new SolrSearchList(rsp, searchItemFilter, contentProducerFactory);
+            return new SolrSearchResultList(rsp, filterChain);
         } catch (SolrServerException e) {
             throw new InvalidSearchQueryException("Failed to parse Query ", e);
         }
