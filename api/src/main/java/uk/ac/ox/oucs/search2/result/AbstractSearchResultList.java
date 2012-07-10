@@ -1,6 +1,5 @@
 package uk.ac.ox.oucs.search2.result;
 
-import uk.ac.ox.oucs.search2.filter.FilterChain;
 import uk.ac.ox.oucs.search2.filter.SearchFilter;
 
 import java.util.*;
