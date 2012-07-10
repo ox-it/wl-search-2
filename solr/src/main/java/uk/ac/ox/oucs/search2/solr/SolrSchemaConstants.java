@@ -14,7 +14,11 @@ public final class SolrSchemaConstants {
     public static final String SUBTYPE_FIELD = "subtype";
     public static final String EVENTHANDLER_FIELD = "eventhandler";
     public static final String TIMESTAMP_FIELD = "timestamp";
+    public static final String URL_FIELD = "url";
+    public static final String PORTALURL_FIELD = "portalurl";
     public static final String CONTENT_FIELD = "contents";
+
+    public static final String SCORE_FIELD = "score";
 
     public static final String PROPERTY_PREFIX = "property_";
     public static final String SOLRCELL_UPREFIX = "tika_";

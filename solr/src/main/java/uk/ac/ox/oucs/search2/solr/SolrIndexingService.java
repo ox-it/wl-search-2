@@ -48,6 +48,8 @@ public class SolrIndexingService extends AbstractIndexingService {
                 document.addField(SolrSchemaConstants.CONTAINER_FIELD, content.getContainer());
                 document.addField(SolrSchemaConstants.TYPE_FIELD, content.getType());
                 document.addField(SolrSchemaConstants.SUBTYPE_FIELD, content.getSubtype());
+                document.addField(SolrSchemaConstants.URL_FIELD, content.getUrl());
+                document.addField(SolrSchemaConstants.PORTALURL_FIELD, content.isPortalUrl());
                 document.addField(SolrSchemaConstants.EVENTHANDLER_FIELD, eventHandlerName);
                 document.addField(SolrSchemaConstants.TIMESTAMP_FIELD, System.currentTimeMillis());
 
