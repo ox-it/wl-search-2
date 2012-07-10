@@ -42,7 +42,7 @@ public class BackSearchResultList extends AbstractSearchResultList<SearchList> {
      * @return
      */
     @Override
-    protected List<? extends SearchResult> extractResults(SearchList result, Iterable<SearchFilter> filters) {
+    protected List<? extends SearchResult> getSearchResults(SearchList result, Iterable<SearchFilter> filters) {
         termFrequency = new HashMap<String, Long>();
         List<SearchResult> searchResults = new ArrayList<SearchResult>(result.size());
         for (org.sakaiproject.search.api.SearchResult originalSearchResult : result) {

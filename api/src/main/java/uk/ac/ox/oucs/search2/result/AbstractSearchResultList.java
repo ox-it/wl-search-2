@@ -16,10 +16,10 @@ public abstract class AbstractSearchResultList<T> implements SearchResultList {
     }
 
     protected AbstractSearchResultList(T result, Iterable<SearchFilter> searchFilters) {
-        this.results = Collections.unmodifiableList(extractResults(result, searchFilters));
+        this.results = Collections.unmodifiableList(getSearchResults(result, searchFilters));
     }
 
-    protected abstract List<? extends SearchResult> extractResults(T result, Iterable<SearchFilter> filters);
+    protected abstract List<? extends SearchResult> getSearchResults(T result, Iterable<SearchFilter> filters);
 
     //----------------------------------------
     // Methods from List delegated internally
