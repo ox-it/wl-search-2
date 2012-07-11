@@ -17,11 +17,10 @@ import java.util.Map;
 public class DefaultIndexEventManager extends AbstractIndexEventManager {
     private final static Log logger = LogFactory.getLog(DefaultIndexEventManager.class);
     private IndexingService indexingService;
-    private Map<String, Collection<IndexEventHandler>> indexEventHandlers;
+    private Map<String, Collection<IndexEventHandler>> indexEventHandlers = new HashMap<String, Collection<IndexEventHandler>>();
 
     public DefaultIndexEventManager(NotificationService notificationService) {
         super(notificationService);
-        indexEventHandlers = new HashMap<String, Collection<IndexEventHandler>>();
     }
 
     public void addContentEventHandler(IndexEventHandler indexEventHandler) {
