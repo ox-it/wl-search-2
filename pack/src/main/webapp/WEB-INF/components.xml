@@ -8,4 +8,5 @@
 
     <import resource="defaults.xml" />
     <import resource="backward-compatibility.xml"/>
+    <import resource="solr.xml"/>
 </beans>
