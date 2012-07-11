@@ -12,7 +12,7 @@
     </bean>
     <bean id="uk.ac.ox.oucs.search2.backwardcompatibility.SearchServiceInterceptor"
           class="uk.ac.ox.oucs.search2.backwardcompatibility.SearchServiceInterceptor">
-        <constructor-arg ref="uk.ac.ox.oucs.search2.backwardcompatibility.event.BackIndexEventManager" />
+        <constructor-arg ref="uk.ac.ox.oucs.search2.event.IndexEventManager" />
         <constructor-arg ref="uk.ac.ox.oucs.search2.ContentProducerRegistry" />
     </bean>
     <bean id="uk.ac.ox.oucs.search2.backwardcompatibility.event.BackIndexEventManager" class="uk.ac.ox.oucs.search2.backwardcompatibility.event.BackIndexEventManager"
