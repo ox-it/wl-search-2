@@ -9,7 +9,7 @@ import org.w3c.dom.Element;
  * @author Colin Hebert
  */
 public abstract class AbstractIndexEventManager implements IndexEventManager {
-    private final static Log logger = LogFactory.getLog(AbstractIndexEventHandler.class);
+    private final static Log logger = LogFactory.getLog(AbstractIndexEventManager.class);
     private NotificationEdit notification;
 
     public AbstractIndexEventManager(NotificationService notificationService) {
