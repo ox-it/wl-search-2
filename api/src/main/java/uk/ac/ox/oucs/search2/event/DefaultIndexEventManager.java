@@ -41,7 +41,7 @@ public class DefaultIndexEventManager extends AbstractIndexEventManager {
         }
     }
 
-    private void handleEvent(Event event, IndexEventHandler eventHandler) {
+    protected void handleEvent(Event event, IndexEventHandler eventHandler) {
         if (!eventHandler.isHandled(event))
             return;
 
