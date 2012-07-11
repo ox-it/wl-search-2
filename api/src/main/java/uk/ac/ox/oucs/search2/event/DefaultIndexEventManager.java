@@ -23,18 +23,9 @@ public class DefaultIndexEventManager extends AbstractIndexEventManager {
         super(notificationService);
     }
 
-    public void addContentEventHandler(IndexEventHandler indexEventHandler) {
-        super.addContentEventHandler(indexEventHandler);
-        if (indexEventHandler.getSupportedEventTypes().size() > 0) {
-            for (String eventName : indexEventHandler.getSupportedEventTypes()) {
-                mapHandlerToEvent(indexEventHandler, eventName);
-            }
-        } else {
-            mapHandlerToEvent(indexEventHandler, null);
-        }
-    }
-
-    private void mapHandlerToEvent(IndexEventHandler indexEventHandler, String eventName) {
+    @Override
+    protected void registerEventHandlerToEvent(IndexEventHandler indexEventHandler, String eventName) {
+        super.registerEventHandlerToEvent(indexEventHandler, eventName);
         Collection<IndexEventHandler> eventHandlers = indexEventHandlers.get(eventName);
         if (eventHandlers == null) {
             eventHandlers = new LinkedList<IndexEventHandler>();
@@ -46,9 +37,6 @@ public class DefaultIndexEventManager extends AbstractIndexEventManager {
     @Override
     protected void notify(Event event) {
         for (IndexEventHandler eventHandler : indexEventHandlers.get(event.getEvent())) {
-            handleEvent(event, eventHandler);
-        }
-        for (IndexEventHandler eventHandler : indexEventHandlers.get(null)) {
             handleEvent(event, eventHandler);
         }
     }
