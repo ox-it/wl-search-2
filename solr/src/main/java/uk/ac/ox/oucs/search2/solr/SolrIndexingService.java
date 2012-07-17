@@ -36,6 +36,7 @@ public class SolrIndexingService extends AbstractIndexingService {
     @Override
     public void indexContent(String eventHandlerName, Iterable<Content> contents) {
         try {
+            int i = 0;
             for (Content content : contents) {
                 SolrRequest indexRequest;
 
@@ -71,6 +72,10 @@ public class SolrIndexingService extends AbstractIndexingService {
                     continue;
                 }
                 solrServer.request(indexRequest);
+                if(i++ >= 10){
+                    solrServer.commit();
+                    i = 0;
+                }
 
             }
             solrServer.commit();
