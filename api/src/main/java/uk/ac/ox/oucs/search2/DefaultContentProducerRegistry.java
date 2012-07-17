@@ -22,8 +22,12 @@ public class DefaultContentProducerRegistry implements ContentProducerRegistry {
     @Override
     public ContentProducer getContentProducer(String reference) {
         for (ContentProducer contentProducer : contentProducers) {
-            if (contentProducer.isHandled(reference))
-                return contentProducer;
+            try {
+                if (contentProducer.isHandled(reference))
+                    return contentProducer;
+            } catch (Exception e) {
+                logger.warn("The content producer '" + contentProducer.getClass() + "' has thrown an exception", e);
+            }
         }
         logger.warn("Couldn't find a content producer for the reference '" + reference + "'.");
         return null;
