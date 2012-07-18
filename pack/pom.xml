@@ -22,6 +22,10 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>search2-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>search2-api</artifactId>
             <scope>provided</scope>
         </dependency>

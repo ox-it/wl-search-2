@@ -26,6 +26,10 @@
             <artifactId>search2-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>uk.ac.ox.oucs.search2</groupId>
+            <artifactId>search2-impl</artifactId>
+        </dependency>
 
         <!-- Dependencies -->
         <dependency>
