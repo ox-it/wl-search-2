@@ -72,7 +72,7 @@ public class SolrIndexingService extends AbstractIndexingService {
                     continue;
                 }
                 solrServer.request(indexRequest);
-                if(i++ >= 10){
+                if (i++ >= 10) {
                     solrServer.commit();
                     i = 0;
                 }

@@ -1,7 +1,5 @@
 package uk.ac.ox.oucs.search2.content;
 
-import uk.ac.ox.oucs.search2.content.ContentProducer;
-
 /**
  * @author Colin Hebert
  */

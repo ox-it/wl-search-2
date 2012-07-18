@@ -12,12 +12,15 @@
     </bean>
     <bean id="uk.ac.ox.oucs.search2.backwardcompatibility.SearchServiceInterceptor"
           class="uk.ac.ox.oucs.search2.backwardcompatibility.SearchServiceInterceptor">
-        <constructor-arg ref="uk.ac.ox.oucs.search2.event.IndexEventManager" />
-        <constructor-arg ref="uk.ac.ox.oucs.search2.ContentProducerRegistry" />
+        <constructor-arg ref="uk.ac.ox.oucs.search2.event.IndexEventManager"/>
+        <constructor-arg ref="uk.ac.ox.oucs.search2.ContentProducerRegistry"/>
     </bean>
-    <bean id="uk.ac.ox.oucs.search2.backwardcompatibility.event.BackIndexEventManager" class="uk.ac.ox.oucs.search2.backwardcompatibility.event.BackIndexEventManager"
+    <bean id="uk.ac.ox.oucs.search2.backwardcompatibility.event.BackIndexEventManager"
+          class="uk.ac.ox.oucs.search2.backwardcompatibility.event.BackIndexEventManager"
           parent="uk.ac.ox.oucs.search2.event.AbstractIndexEventManager">
         <property name="searchIndexBuilder" ref="${search2.search1.indexbuilder}"/>
     </bean>
-    <bean id="uk.ac.ox.oucs.search2.backwardcompatibility.event.BackDefaultIndexEventManager" class="uk.ac.ox.oucs.search2.backwardcompatibility.event.BackDefaultIndexEventManager" parent="uk.ac.ox.oucs.search2.event.DefaultIndexEventManager" />
+    <bean id="uk.ac.ox.oucs.search2.backwardcompatibility.event.BackDefaultIndexEventManager"
+          class="uk.ac.ox.oucs.search2.backwardcompatibility.event.BackDefaultIndexEventManager"
+          parent="uk.ac.ox.oucs.search2.event.DefaultIndexEventManager"/>
 </beans>

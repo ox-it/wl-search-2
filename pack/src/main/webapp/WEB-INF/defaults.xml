@@ -12,16 +12,20 @@
                 </bean>
             </list>
         </property>
-        <property name="defaultLength" value="25" />
+        <property name="defaultLength" value="25"/>
     </bean>
 
-    <bean id="uk.ac.ox.oucs.search2.event.AbstractIndexEventManager" class="uk.ac.ox.oucs.search2.event.AbstractIndexEventManager" abstract="true">
-        <constructor-arg ref="org.sakaiproject.event.api.NotificationService" />
+    <bean id="uk.ac.ox.oucs.search2.event.AbstractIndexEventManager"
+          class="uk.ac.ox.oucs.search2.event.AbstractIndexEventManager" abstract="true">
+        <constructor-arg ref="org.sakaiproject.event.api.NotificationService"/>
     </bean>
-    <bean id="uk.ac.ox.oucs.search2.event.DefaultIndexEventManager" class="uk.ac.ox.oucs.search2.event.DefaultIndexEventManager" parent="uk.ac.ox.oucs.search2.event.AbstractIndexEventManager">
-        <property name="indexingService" ref="uk.ac.ox.oucs.search2.IndexingService" />
+    <bean id="uk.ac.ox.oucs.search2.event.DefaultIndexEventManager"
+          class="uk.ac.ox.oucs.search2.event.DefaultIndexEventManager"
+          parent="uk.ac.ox.oucs.search2.event.AbstractIndexEventManager">
+        <property name="indexingService" ref="uk.ac.ox.oucs.search2.IndexingService"/>
     </bean>
 
-    <bean id="uk.ac.ox.oucs.search2.DefaultContentProducerRegistry" class="uk.ac.ox.oucs.search2.event.DefaultContentProducerRegistry" />
+    <bean id="uk.ac.ox.oucs.search2.DefaultContentProducerRegistry"
+          class="uk.ac.ox.oucs.search2.event.DefaultContentProducerRegistry"/>
 
 </beans>

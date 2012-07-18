@@ -12,7 +12,7 @@
     </bean>
 
     <bean id="uk.ac.ox.oucs.search2.solr.indexingServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
-        <constructor-arg value="${search2.solr.server}" />
+        <constructor-arg value="${search2.solr.server}"/>
     </bean>
     <alias alias="uk.ac.ox.oucs.search2.solr.searchServer" name="uk.ac.ox.oucs.search2.solr.indexingServer"/>
 </beans>

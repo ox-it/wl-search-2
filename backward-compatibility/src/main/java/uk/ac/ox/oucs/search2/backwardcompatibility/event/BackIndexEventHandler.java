@@ -66,7 +66,7 @@ public class BackIndexEventHandler implements IndexEventHandler {
         return ecp.getClass().getCanonicalName();
     }
 
-    public EntityContentProducer getEntityContentProducer(){
+    public EntityContentProducer getEntityContentProducer() {
         return ecp;
     }
 }

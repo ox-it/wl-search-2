@@ -34,7 +34,7 @@ public class BackIndexEventManager extends AbstractIndexEventManager {
         super.addContentEventHandler(indexEventHandler);
         if (indexEventHandler instanceof BackIndexEventHandler)
             searchIndexBuilder.registerEntityContentProducer(((BackIndexEventHandler) indexEventHandler).getEntityContentProducer());
-         else
+        else
             searchIndexBuilder.registerEntityContentProducer(new BackEventEntityContentProducer(indexEventHandler));
     }
 

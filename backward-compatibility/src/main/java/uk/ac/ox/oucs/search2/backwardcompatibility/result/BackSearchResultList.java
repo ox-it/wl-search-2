@@ -37,6 +37,7 @@ public class BackSearchResultList extends AbstractSearchResultList<SearchList> {
     /**
      * {@inheritDoc}
      * Extract the term frequencies at the same time that result are extracted. This avoids to do another loop on each result
+     *
      * @param result
      * @param filters
      * @return

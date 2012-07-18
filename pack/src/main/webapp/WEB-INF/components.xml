@@ -6,7 +6,7 @@
     <alias alias="uk.ac.ox.oucs.search2.ContentProducerRegistry" name="${search2.contentproducerregistry.impl}"/>
     <alias alias="uk.ac.ox.oucs.search2.event.IndexEventManager" name="${search2.indexeventmanager.impl}"/>
 
-    <import resource="defaults.xml" />
+    <import resource="defaults.xml"/>
     <import resource="backward-compatibility.xml"/>
     <import resource="solr.xml"/>
 </beans>

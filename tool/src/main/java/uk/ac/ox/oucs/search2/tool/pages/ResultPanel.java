@@ -52,7 +52,7 @@ public class ResultPanel extends Panel {
     }
 
     private Link<String> generateSuggestionLink() {
-         Link<String> suggestionLink = new Link<String>("suggestionLink", suggestion) {
+        Link<String> suggestionLink = new Link<String>("suggestionLink", suggestion) {
             @Override
             public void onClick() {
                 callback.callback(getModelObject());
