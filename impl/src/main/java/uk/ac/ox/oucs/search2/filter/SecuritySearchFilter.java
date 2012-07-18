@@ -1,7 +1,7 @@
 package uk.ac.ox.oucs.search2.filter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.ac.ox.oucs.search2.ContentProducerRegistry;
 import uk.ac.ox.oucs.search2.content.ContentProducer;
 import uk.ac.ox.oucs.search2.result.SearchResult;
@@ -10,7 +10,7 @@ import uk.ac.ox.oucs.search2.result.SearchResult;
  * @author Colin Hebert
  */
 public class SecuritySearchFilter implements SearchFilter {
-    private final static Log logger = LogFactory.getLog(FilterChain.class);
+    private static final Logger logger = LoggerFactory.getLogger(SecuritySearchFilter.class);
     private ContentProducerRegistry contentProducerRegistry;
     private static final SearchResult censoredSearchResult = new SearchResult.CensoredSearchResult();
 

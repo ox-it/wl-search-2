@@ -1,8 +1,8 @@
 package uk.ac.ox.oucs.search2.event;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.sakaiproject.event.api.Event;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.ac.ox.oucs.search2.content.Content;
 
 import java.util.Collections;
@@ -13,7 +13,7 @@ import java.util.Collections;
  * @author Colin Hebert
  */
 public abstract class AbstractIndexEventHandler implements IndexEventHandler {
-    private final static Log logger = LogFactory.getLog(AbstractIndexEventHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(AbstractIndexEventHandler.class);
 
     @Override
     public Iterable<Content> getContent(Event event) {

@@ -1,15 +1,15 @@
 package uk.ac.ox.oucs.search2.event;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.sakaiproject.event.api.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
 /**
  * @author Colin Hebert
  */
 public abstract class AbstractIndexEventManager implements IndexEventManager {
-    private final static Log logger = LogFactory.getLog(AbstractIndexEventManager.class);
+    private static final Logger logger = LoggerFactory.getLogger(AbstractIndexEventManager.class);
     private NotificationEdit notification;
 
     public AbstractIndexEventManager(NotificationService notificationService) {
@@ -27,7 +27,7 @@ public abstract class AbstractIndexEventManager implements IndexEventManager {
         }
     }
 
-    protected void registerEventHandlerToEvent(IndexEventHandler indexEventHandler, String eventName){
+    protected void registerEventHandlerToEvent(IndexEventHandler indexEventHandler, String eventName) {
         notification.addFunction(eventName);
         logger.info("The event '" + eventName + "' is now monitored by the index event manager.");
     }
