@@ -1,8 +1,9 @@
-package uk.ac.ox.oucs.search2;
+package uk.ac.ox.oucs.search2.event;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.ac.ox.oucs.search2.content.ContentProducer;
+import uk.ac.ox.oucs.search2.content.ContentProducerRegistry;
 
 import java.util.ArrayList;
 import java.util.Collection;

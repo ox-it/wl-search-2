@@ -4,7 +4,7 @@ import org.sakaiproject.event.api.Event;
 import org.sakaiproject.event.api.Notification;
 import org.sakaiproject.search.api.*;
 import org.sakaiproject.search.model.SearchBuilderItem;
-import uk.ac.ox.oucs.search2.ContentProducerRegistry;
+import uk.ac.ox.oucs.search2.content.ContentProducerRegistry;
 import uk.ac.ox.oucs.search2.backwardcompatibility.content.BackContent;
 import uk.ac.ox.oucs.search2.backwardcompatibility.event.BackIndexEventHandler;
 import uk.ac.ox.oucs.search2.content.Content;

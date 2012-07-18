@@ -22,6 +22,6 @@
         <property name="indexingService" ref="uk.ac.ox.oucs.search2.IndexingService" />
     </bean>
 
-    <bean id="uk.ac.ox.oucs.search2.DefaultContentProducerRegistry" class="uk.ac.ox.oucs.search2.DefaultContentProducerRegistry" />
+    <bean id="uk.ac.ox.oucs.search2.DefaultContentProducerRegistry" class="uk.ac.ox.oucs.search2.event.DefaultContentProducerRegistry" />
 
 </beans>
