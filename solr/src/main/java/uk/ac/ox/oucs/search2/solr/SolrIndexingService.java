@@ -27,7 +27,7 @@ import java.util.Map;
  */
 public class SolrIndexingService extends AbstractIndexingService {
     private final SolrServer solrServer;
-    private static final Logger logger = LoggerFactory.getLogger(AbstractIndexingService.class);
+    private static final Logger logger = LoggerFactory.getLogger(SolrIndexingService.class);
 
     public SolrIndexingService(SolrServer solrServer) {
         this.solrServer = solrServer;
