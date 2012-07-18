@@ -40,6 +40,7 @@
 
     <modules>
         <module>api</module>
+        <module>impl</module>
         <module>backward-compatibility</module>
         <module>tool</module>
         <module>pack</module>
@@ -52,6 +53,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>search2-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>search2-impl</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
