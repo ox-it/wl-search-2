@@ -19,7 +19,7 @@ import java.util.Iterator;
  * @author Colin Hebert
  */
 public class SolrSearchService extends AbstractSearchService {
-    private final static Logger logger = LoggerFactory.getLogger(AbstractSearchService.class);
+    private final static Logger logger = LoggerFactory.getLogger(SolrSearchService.class);
     private final SolrServer solrServer;
 
     public SolrSearchService(SolrServer solrServer) {
