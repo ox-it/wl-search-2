@@ -103,11 +103,6 @@ public class SolrIndexingService extends AbstractIndexingService {
     }
 
     @Override
-    public void indexSite(String eventHandlerName, Iterable<Content> contents, String site) {
-        indexContent(eventHandlerName, contents);
-    }
-
-    @Override
     public void unindexSite(String eventHandlerName, String siteId) {
         logger.info("Removing content for eventHandler '" + eventHandlerName + "' and siteId '" + siteId + "'");
         try {
@@ -118,11 +113,6 @@ public class SolrIndexingService extends AbstractIndexingService {
         } catch (IOException e) {
             logger.error("Couln't access the solr server", e);
         }
-    }
-
-    @Override
-    public void indexAll(String eventHandlerName, Iterable<Content> contents) {
-        indexContent(eventHandlerName, contents);
     }
 
     @Override
