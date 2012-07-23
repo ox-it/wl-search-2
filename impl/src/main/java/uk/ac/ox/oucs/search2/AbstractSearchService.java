@@ -34,16 +34,16 @@ public abstract class AbstractSearchService implements SearchService {
     }
 
     @Override
-    public SearchResultList search(String searchQuery, int start, int length) {
+    public SearchResultList search(String searchQuery, long start, long length) {
         return search(searchQuery, getAllViewableSites(), start, length, searchFilters);
     }
 
     @Override
-    public SearchResultList search(String searchQuery, Collection<String> contexts, int start, int length) {
+    public SearchResultList search(String searchQuery, Collection<String> contexts, long start, long length) {
         return search(searchQuery, contexts, start, length, searchFilters);
     }
 
-    protected abstract SearchResultList search(String searchQuery, Collection<String> contexts, int start, int length, Iterable<SearchFilter> filterChain);
+    protected abstract SearchResultList search(String searchQuery, Collection<String> contexts, long start, long length, Iterable<SearchFilter> filterChain);
 
     @Override
     public void setSearchFilters(Iterable<SearchFilter> searchFilters) {

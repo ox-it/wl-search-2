@@ -13,9 +13,9 @@ public interface SearchService {
 
     SearchResultList search(String searchQuery, Collection<String> contexts);
 
-    SearchResultList search(String searchQuery, int start, int length);
+    SearchResultList search(String searchQuery, long start, long length);
 
-    SearchResultList search(String searchQuery, Collection<String> contexts, int start, int length);
+    SearchResultList search(String searchQuery, Collection<String> contexts, long start, long length);
 
     String getSuggestion(String searchString);
 

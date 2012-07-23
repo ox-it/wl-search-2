@@ -26,12 +26,12 @@ public class SolrSearchService extends AbstractSearchService {
         this.solrServer = solrServer;
     }
 
-    protected SearchResultList search(String searchQuery, Collection<String> contexts, int start, int length, Iterable<SearchFilter> filterChain) {
+    protected SearchResultList search(String searchQuery, Collection<String> contexts, long start, long length, Iterable<SearchFilter> filterChain) {
         try {
             SolrQuery query = new SolrQuery();
 
-            query.setStart(start);
-            query.setRows(length);
+            query.setStart((int) start);
+            query.setRows((int) length);
             query.setFields("*", "score");
 
             query.setHighlight(true).setHighlightSnippets(5);

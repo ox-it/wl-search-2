@@ -72,7 +72,7 @@ public class SearchEntityProvider extends AbstractEntityProvider implements Acti
             search.setLimit(DEFAULT_RESULT_COUNT);
 
         //Actual search
-        SearchResultList searchResults = searchService.search(query, contexts, (int) search.getStart(), (int) search.getLimit());
+        SearchResultList searchResults = searchService.search(query, contexts, search.getStart(), search.getLimit());
 
         //Transforms SearchResult in a SearchResultEntity to avoid conflicts with the getId() method (see SRCH-85)
         List<SearchResultEntity> results = new ArrayList<SearchResultEntity>(searchResults.size());
