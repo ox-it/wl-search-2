@@ -20,7 +20,7 @@ public class SearchPage extends SakaiPage {
 
     @SpringBean
     private SearchService searchService;
-    private Model<SearchScope> searchScopeModel = new Model<SearchScope>(SearchScope.CURRENT_SITE);
+    private Model<SearchService.SearchContext> searchContextModel = new Model<SearchService.SearchContext>(SearchService.SearchContext.CURRENT_SITE);
     private Panel resultPanel;
     private Model<String> searchQueryModel = new Model<String>();
     private final SuggestionCallback CALLBACK = new SuggestionCallback();
@@ -37,10 +37,10 @@ public class SearchPage extends SakaiPage {
         TextField<String> searchField = new TextField<String>("search", searchQueryModel);
         form.add(searchField);
 
-        RadioChoice<SearchScope> searchType = new RadioChoice<SearchScope>("searchScope",
-                searchScopeModel,
-                Arrays.asList(SearchScope.values()),
-                new EnumChoiceRenderer<SearchScope>(this));
+        RadioChoice<SearchService.SearchContext> searchType = new RadioChoice<SearchService.SearchContext>("searchContext",
+                searchContextModel,
+                Arrays.asList(SearchService.SearchContext.values()),
+                new EnumChoiceRenderer<SearchService.SearchContext>(this));
         searchType.setSuffix("");
         form.add(searchType);
         resultPanel = new EmptyPanel("resultPanel");
@@ -48,16 +48,10 @@ public class SearchPage extends SakaiPage {
     }
 
     private void generateResultPanel() {
-        ResultPanel newPanel = new ResultPanel(this.resultPanel.getId(), searchService, searchQueryModel.getObject(), searchScopeModel.getObject(), CALLBACK);
+        ResultPanel newPanel = new ResultPanel(this.resultPanel.getId(), searchService, searchQueryModel.getObject(), searchContextModel.getObject(), CALLBACK);
         newPanel.setItemsPerPage(ITEMS_PER_PAGE);
         resultPanel.replaceWith(newPanel);
         resultPanel = newPanel;
-    }
-
-    public enum SearchScope {
-        CURRENT_SITE,
-        SUBSCRIBED_SITES,
-        ALL_SITES
     }
 
     public class SuggestionCallback {

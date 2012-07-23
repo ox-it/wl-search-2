@@ -17,7 +17,6 @@ import org.apache.wicket.model.Model;
 import org.sakaiproject.component.cover.ComponentManager;
 import org.sakaiproject.site.api.Site;
 import org.sakaiproject.site.api.SiteService;
-import org.sakaiproject.tool.api.ToolManager;
 import org.sakaiproject.user.api.UserDirectoryService;
 import uk.ac.ox.oucs.search2.SearchService;
 import uk.ac.ox.oucs.search2.result.SearchResult;
@@ -38,9 +37,9 @@ public class ResultPanel extends Panel {
     private final SearchResultDataProvider searchResultDataProvider;
     private final SearchPage.SuggestionCallback callback;
 
-    public ResultPanel(String id, SearchService searchService, String searchQuery, SearchPage.SearchScope searchScope, SearchPage.SuggestionCallback suggestionCallback) {
+    public ResultPanel(String id, SearchService searchService, String searchQuery, SearchService.SearchContext searchContext, SearchPage.SuggestionCallback suggestionCallback) {
         super(id);
-        searchResultDataProvider = new SearchResultDataProvider(searchService, searchQuery, searchScope);
+        searchResultDataProvider = new SearchResultDataProvider(searchService, searchQuery, searchContext);
         termWeigher = new TermWeigher();
         callback = suggestionCallback;
 
@@ -103,52 +102,20 @@ public class ResultPanel extends Panel {
     private class SearchResultDataProvider implements IDataProvider<SearchResult> {
         private final SearchService searchService;
         private final String query;
-        private final Collection<String> contexts;
+        private final SearchService.SearchContext context;
 
 
-        public SearchResultDataProvider(SearchService searchService, String query, SearchPage.SearchScope searchScope) {
+        public SearchResultDataProvider(SearchService searchService, String query, SearchService.SearchContext searchContext) {
             this.searchService = searchService;
             this.query = query;
-            contexts = extractContexts(searchScope);
-        }
-
-        private Collection<String> extractContexts(SearchPage.SearchScope searchScope) {
-            if (searchScope == SearchPage.SearchScope.CURRENT_SITE) {
-                ToolManager toolManager = (ToolManager) ComponentManager.get(ToolManager.class);
-                return Collections.singleton(toolManager.getCurrentPlacement().getContext());
-            } else if (searchScope == SearchPage.SearchScope.SUBSCRIBED_SITES) {
-                return getCurrentUserSubscribedSites();
-            } else if (searchScope == SearchPage.SearchScope.ALL_SITES) {
-                return null;
-            } else {
-                throw new UnsupportedOperationException("Can't do a search on " + searchScope);
-            }
-        }
-
-        private Collection<String> getCurrentUserSubscribedSites() {
-            SiteService siteService = (SiteService) ComponentManager.get(SiteService.class);
-            UserDirectoryService userDirectoryService = (UserDirectoryService) ComponentManager.get(UserDirectoryService.class);
-
-            List<Site> userSites = siteService.getSites(SiteService.SelectionType.ACCESS, null, null, null, null, null);
-            String userId = userDirectoryService.getCurrentUser().getId();
-
-            Collection<String> siteIds = new ArrayList<String>(userSites.size() + 1);
-            for (Site site : userSites) {
-                siteIds.add(site.getId());
-            }
-            siteIds.add(siteService.getUserSiteId(userId));
-            return siteIds;
+            context = searchContext;
         }
 
         @Override
         public Iterator<? extends SearchResult> iterator(int first, int count) {
             SearchResultList searchResultList;
             long queryStartTime = System.currentTimeMillis();
-            if (contexts == null) {
-                searchResultList = searchService.search(query, first, count);
-            } else {
-                searchResultList = searchService.search(query, contexts, first, count);
-            }
+            searchResultList = searchService.search(query, context, first, count);
             long queryEndTime = System.currentTimeMillis();
             queryDuration.setObject((queryEndTime - queryStartTime) / 1000d);
 
@@ -160,11 +127,7 @@ public class ResultPanel extends Panel {
 
         @Override
         public int size() {
-            if (contexts == null) {
-                return (int) searchService.search(query, 0, 0).getNumberResultsFound();
-            } else {
-                return (int) searchService.search(query, contexts, 0, 0).getNumberResultsFound();
-            }
+            return (int) searchService.search(query, context, 0, 0).getNumberResultsFound();
         }
 
         @Override
