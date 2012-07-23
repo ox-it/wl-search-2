@@ -8,10 +8,7 @@ import org.slf4j.LoggerFactory;
 import uk.ac.ox.oucs.search2.filter.SearchFilter;
 import uk.ac.ox.oucs.search2.result.SearchResultList;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Colin Hebert
@@ -34,6 +31,11 @@ public abstract class AbstractSearchService implements SearchService {
     }
 
     @Override
+    public SearchResultList search(String searchQuery, SearchContext context) {
+        return search(searchQuery, getContexts(context), 0, defaultLength, searchFilters);
+    }
+
+    @Override
     public SearchResultList search(String searchQuery, long start, long length) {
         return search(searchQuery, getAllViewableSites(), start, length, searchFilters);
     }
@@ -50,28 +52,59 @@ public abstract class AbstractSearchService implements SearchService {
         this.searchFilters = searchFilters;
     }
 
+
+    /**
+     * Obtain a list of site id based on the selected context
+     *
+     * @param context
+     * @return
+     */
+    private Collection<String> getContexts(SearchContext context) {
+        switch (context) {
+            case ALL_SITES:
+                return getAllViewableSites();
+            case SUBSCRIBED_SITES:
+                return getAllSubscribedSites();
+            case CURRENT_SITE:
+                if (false) {
+                    //ToolManager toolManager = (ToolManager) ComponentManager.get(ToolManager.class);
+                    //return Collections.singleton(toolManager.getCurrentPlacement().getContext());
+                } else {
+                    logger.info("Couldn't find the current website, switching back to the default context");
+                }
+            default:
+                return getAllSubscribedSites();
+        }
+    }
+
     private Collection<String> getAllViewableSites() {
         try {
             logger.info("Finding every site to in which the current user is a member.");
-            String userId = userDirectoryService.getCurrentUser().getId();
-
             //TODO: Check that PUBVIEW and ACCESS aren't redundant
-            List<Site> userSites = siteService.getSites(SiteService.SelectionType.ACCESS, null, null, null, null, null);
             List<Site> publicSites = siteService.getSites(SiteService.SelectionType.PUBVIEW, null, null, null, null, null);
-            Collection<String> siteIds = new HashSet<String>(userSites.size() + publicSites.size() + 1);
-            for (Site site : userSites) {
-                siteIds.add(site.getId());
-            }
+            Collection<String> siteIds = new HashSet<String>(getAllSubscribedSites());
             for (Site site : publicSites) {
                 siteIds.add(site.getId());
             }
-            siteIds.add(siteService.getUserSiteId(userId));
             logger.debug("Found " + siteIds.size() + " userSites: " + siteIds);
             return siteIds;
         } catch (Exception e) {
             logger.warn("Couldn't get every site for the current user.", e);
             return Collections.emptyList();
         }
+    }
+
+    private Collection<String> getAllSubscribedSites() {
+        List<Site> subscribedSites = siteService.getSites(SiteService.SelectionType.ACCESS, null, null, null, null, null);
+        List<String> siteIds = new ArrayList<String>(subscribedSites.size() + 1);
+
+        return siteIds;
+
+    }
+
+    private String getUserSite() {
+        String userId = userDirectoryService.getCurrentUser().getId();
+        return siteService.getUserSiteId(userId);
     }
 
     public void setDefaultLength(int defaultLength) {
