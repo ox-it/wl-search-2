@@ -84,11 +84,6 @@
             </dependency>
 
             <dependency>
-                <groupId>commons-logging</groupId>
-                <artifactId>commons-logging</artifactId>
-                <version>${commons-logging.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
@@ -121,6 +116,16 @@
                 <artifactId>sakai-kernel-component</artifactId>
                 <version>${sakai.kernel.version}</version>
                 <type>sakai-component</type>
+            </dependency>
+            <dependency>
+                <groupId>org.sakaiproject.entitybroker</groupId>
+                <artifactId>entitybroker-api</artifactId>
+                <version>${sakai.entitybroker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.sakaiproject.entitybroker</groupId>
+                <artifactId>entitybroker-utils</artifactId>
+                <version>${sakai.entitybroker.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
