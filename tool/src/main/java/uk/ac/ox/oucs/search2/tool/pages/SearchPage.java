@@ -9,6 +9,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import uk.ac.ox.oucs.search2.SearchService;
+import uk.ac.ox.oucs.search2.tool.TermWeigher;
 
 import java.util.Arrays;
 
@@ -50,6 +51,7 @@ public class SearchPage extends SakaiPage {
     private void generateResultPanel() {
         ResultPanel newPanel = new ResultPanel(this.resultPanel.getId(), searchService, searchQueryModel.getObject(), searchContextModel.getObject(), CALLBACK);
         newPanel.setItemsPerPage(ITEMS_PER_PAGE);
+        newPanel.setTermWeigher(new TermWeigher());
         resultPanel.replaceWith(newPanel);
         resultPanel = newPanel;
     }
