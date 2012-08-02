@@ -45,6 +45,11 @@ public abstract class AbstractSearchService implements SearchService {
         return search(searchQuery, contexts, start, length, searchFilters);
     }
 
+    @Override
+    public SearchResultList search(String searchQuery, SearchContext context, long start, long length) {
+        return search(searchQuery, getContexts(context), start, length, searchFilters);
+    }
+
     protected abstract SearchResultList search(String searchQuery, Collection<String> contexts, long start, long length, Iterable<SearchFilter> filterChain);
 
     @Override
