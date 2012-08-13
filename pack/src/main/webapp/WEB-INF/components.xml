@@ -9,4 +9,5 @@
     <import resource="defaults.xml"/>
     <import resource="backward-compatibility.xml"/>
     <import resource="solr.xml"/>
+    <import resource="threaded.xml"/>
 </beans>

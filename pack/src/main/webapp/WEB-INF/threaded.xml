@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-lazy-init="true">
+    <bean id="uk.ac.ox.oucs.search2.thread.ThreadedIndexingService"
+          class="uk.ac.ox.oucs.search2.thread.ThreadedIndexingService">
+        <property name="wrappedIndexingService" ref="${search2.indexservice.threaded.impl}"/>
+        <property name="executor" ref="indexingExecutor"/>
+        <property name="sessionManager" ref="org.sakaiproject.tool.api.SessionManager"/>
+    </bean>
+
+    <bean id="indexingExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="0"/>
+        <property name="maxPoolSize" value="1"/>
+        <property name="keepAliveSeconds" value="30"/>
+    </bean>
+</beans>
